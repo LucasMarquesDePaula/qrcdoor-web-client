@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <sidebar/>
-    <topbar/>
-    <router-view></router-view>
+    <div class="topbar">
+      <topbar/>
+    </div>
+    <div class="sidebar">
+      <sidebar/>
+    </div>
+    <div class="router-view">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -31,9 +37,24 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
-  font-family: Helvetica, sans-serif;
-  text-align: center;
+  position: absolute;
+
+  .sidebar, .topbar {
+    position: fixed;
+  }
+
+  .sidebar {
+    top: 60px;
+  }
+  .topbar {
+    width: 100%;
+  }
+
+  .router-view {
+    margin-left: 60px;
+    margin-top: 60px;
+  }
 }
 </style>

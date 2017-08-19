@@ -6,12 +6,15 @@
 </template>
 
 <script>
+const msg = "Olá"
+
 export default {
   data() {
     return {
-      msg: "Mensagem"
-    }    
-  }
+      msg: `Mensagem ${msg}`
+    }
+  },
+  methods: {}
 }
 </script>
 

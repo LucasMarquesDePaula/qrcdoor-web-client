@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <sidebar-navigation/>
+    <sidebar/>
+    <topbar/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import SidebarNavigation from "@/components/SidebarNavigation"
+import Sidebar from "@/components/Sidebar"
+import Topbar from "@/components/Topbar"
+
 export default {
   components: {
-    SidebarNavigation
+    Sidebar, Topbar
   },
   data() {
     return {

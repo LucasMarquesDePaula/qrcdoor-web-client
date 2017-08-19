@@ -1,23 +1,35 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+    <sidebar-navigation/>
   </div>
 </template>
 
 <script>
+import SidebarNavigation from "@/components/SidebarNavigation"
 export default {
-  name: 'app'
+  components: {
+    SidebarNavigation
+  },
+  data() {
+    return {
+      msg: "Want something new?"
+    }
+  },
+  methods: {
+    startHacking() {
+      this.$notify({
+        title: "Shhh",
+        message: "Just be patient...",
+        duration: 6000
+      })
+    }
+  }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Helvetica, sans-serif;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

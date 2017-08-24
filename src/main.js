@@ -1,14 +1,15 @@
-import "element-ui/lib/theme-default/index.css"
+import "vue-material/dist/vue-material.css"
+import "roboto-forn"
 
 import App from "./App"
-import ElementUI from "element-ui"
 import Vue from "vue"
+import VueMaterial from "vue-material"
 
 import router from "./router"
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUI)
+Vue.use(VueMaterial)
 
 /* eslint-disable no-new */
 new Vue({

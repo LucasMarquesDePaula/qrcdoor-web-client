@@ -39,22 +39,22 @@
 export default {
   methods: {
     toggleLeftSidenav() {
-      this.$refs.leftSidenav.toggle();
+      this.$refs.leftSidenav.toggle()
     },
     toggleRightSidenav() {
-      this.$refs.rightSidenav.toggle();
+      this.$refs.rightSidenav.toggle()
     },
     closeRightSidenav() {
-      this.$refs.rightSidenav.close();
+      this.$refs.rightSidenav.close()
     },
     open(ref) {
-      console.log(`Opened: ${ref}`);
+      console.log(`Opened: ${ref}`)
     },
     close(ref) {
-      console.log(`Closed: ${ref}`);
+      console.log(`Closed: ${ref}`)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

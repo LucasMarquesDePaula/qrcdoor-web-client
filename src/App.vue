@@ -1,60 +1,78 @@
 <template>
   <div id="app">
-    <div class="topbar">
-      <topbar/>
-    </div>
-    <div class="sidebar">
-      <sidebar/>
-    </div>
-    <div class="router-view">
-      <router-view></router-view>
-    </div>
+
+    <md-toolbar>
+      <md-button class="md-icon-button" @click="toggleLeftSidenav">
+        <md-icon>menu</md-icon>
+      </md-button>
+      <h2 class="md-title">My App</h2>
+      <md-button class="md-raised md-accent" @click="toggleRightSidenav">Toggle right</md-button>
+    </md-toolbar>
+
+    <router-view></router-view>
+
+    <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
+      <md-toolbar class="md-large">
+        <div class="md-toolbar-container">
+          <h3 class="md-title">Sidenav content</h3>
+        </div>
+      </md-toolbar>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi cupiditate esse necessitatibus beatae nobis, deserunt ut est fugit, tempora deleniti, eligendi commodi doloribus. Nemo, assumenda possimus, impedit inventore perferendis iusto!</p>
+    </md-sidenav>
+
+    <md-sidenav class="md-right" ref="rightSidenav" @open="open('Right')" @close="close('Right')">
+      <md-toolbar>
+        <div class="md-toolbar-container">
+          <h3 class="md-title">Sidenav content</h3>
+        </div>
+      </md-toolbar>
+
+      <md-button class="md-raised md-accent" @click="closeRightSidenav">Close</md-button>
+    </md-sidenav>
   </div>
 </template>
 
 <script>
-import Sidebar from "@/components/Sidebar"
-import Topbar from "@/components/Topbar"
+// import Sidebar from "@/components/Sidebar"
+// import Topbar from "@/components/Topbar"
 
 export default {
-  components: {
-    Sidebar, Topbar
-  },
-  data() {
-    return {
-      msg: "Want something new?"
-    }
-  },
   methods: {
-    startHacking() {
-      this.$notify({
-        title: "Shhh",
-        message: "Just be patient...",
-        duration: 6000
-      })
+    toggleLeftSidenav() {
+      this.$refs.leftSidenav.toggle();
+    },
+    toggleRightSidenav() {
+      this.$refs.rightSidenav.toggle();
+    },
+    closeRightSidenav() {
+      this.$refs.rightSidenav.close();
+    },
+    open(ref) {
+      console.log(`Opened: ${ref}`);
+    },
+    close(ref) {
+      console.log(`Closed: ${ref}`);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-#app {
-  position: absolute;
-
-  .sidebar, .topbar {
-    position: fixed;
-  }
-
-  .sidebar {
-    top: 60px;
-  }
-  .topbar {
-    width: 100%;
-  }
-
-  .router-view {
-    margin-left: 60px;
-    margin-top: 60px;
-  }
-}
+// #app {
+//   position: absolute;
+//   .sidebar,
+//   .topbar {
+//     position: fixed;
+//   }
+//   .sidebar {
+//     top: 60px;
+//   }
+//   .topbar {
+//     width: 100%;
+//   }
+//   .router-view {
+//     margin-left: 60px;
+//     margin-top: 60px;
+//   }
+// }
 </style>

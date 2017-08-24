@@ -16,6 +16,7 @@
   "dependencies": {
     "font-awesome": "^4.7.0",
     "material-icons": "^0.1.0",
+    "material-design-icons": "^3.0.1",
     "roboto-font": "^0.1.0",
     "vue": "^2.4.2",
     "vue-material": "^0.7.4",

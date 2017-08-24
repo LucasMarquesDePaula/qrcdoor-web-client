@@ -1,5 +1,6 @@
+import "@fonts/material-design-icons/material-icons.css"
+import "roboto-font/css/fonts.css"
 import "vue-material/dist/vue-material.css"
-import "roboto-forn"
 
 import App from "./App"
 import Vue from "vue"

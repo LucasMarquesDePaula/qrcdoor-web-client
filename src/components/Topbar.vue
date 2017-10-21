@@ -1,6 +1,6 @@
 <template>
   <div class="topbar">
-    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+    <el-menu mode="horizontal">
       <el-menu-item index="1">Processing Center</el-menu-item>
       <el-submenu index="2">
         <template slot="title">Workspace</template>
@@ -17,35 +17,17 @@
 
 <script>
 export default {
-  name: "sidebar",
+  name: "topbar",
   data() {
     return {
       isCollapse: true
-    }
-  },
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.sidebarx {
-  /* 100% Full-height */
-  height: 100%;
-  /* 0 width - change this with JavaScript */
-  // width: 0;
-  /* Stay on top */
-  z-index: 1;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  /* 0.5 second transition effect to slide in the sidenav */
-  transition: 0.5s;
+.topbar {
+  width: 100%;
 }
 </style>

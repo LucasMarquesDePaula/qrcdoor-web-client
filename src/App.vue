@@ -13,6 +13,10 @@
 </template>
 
 <script>
+import "font-awesome/css/font-awesome.css"
+import "roboto-fontface/css/roboto/roboto-fontface.css"
+
+
 import Sidebar from "@/components/Sidebar"
 import Topbar from "@/components/Topbar"
 
@@ -37,24 +41,35 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import "~@/styles/conf.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
 #app {
   position: absolute;
 
-  .sidebar, .topbar {
+  .sidebar,
+  .topbar {
     position: fixed;
   }
 
   .sidebar {
-    top: 60px;
+    height: 100%;
   }
+
   .topbar {
-    width: 100%;
+    width: calc(100% - #{$sidebar-width});
+    left: $sidebar-width;
   }
 
   .router-view {
-    margin-left: 60px;
-    margin-top: 60px;
+    margin-left: $sidebar-width;
+    margin-top: $topbar-height;
   }
 }
 </style>

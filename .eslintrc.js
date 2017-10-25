@@ -1,3 +1,5 @@
+// http://eslint.org/docs/user-guide/configuring
+
 module.exports = {
   "root": true,
   "parser": "babel-eslint",
@@ -13,6 +15,10 @@ module.exports = {
   "plugins": [
     "html"
   ],
+  "globals": {
+    "$": true,
+    "moment": true
+  },
   // add your custom rules here
   "rules": {
     /**
@@ -27,17 +33,17 @@ module.exports = {
     // disallow duplicate case labels
     "no-duplicate-case": "error",
     // disallow empty block statements
-    "no-empty": "error",
+    "no-empty": "warn",
     // disallow empty character classes in regular expressions
     "no-empty-character-class": "error",
     // disallow reassigning exceptions in catch clauses
     "no-ex-assign": "error",
-    // disallow unnecessary boolean casts    	
+    // disallow unnecessary boolean casts
     "no-extra-boolean-cast": "error",
     // disallow unnecessary parentheses
     "no-extra-parens": "error",
     // disallow unnecessary semicolons
-    "no-extra-semi": "error",
+    "no-extra-semi": "warn",
     // disallow reassigning function declarations
     "no-func-assign": "error",
     // disallow variable or function declarations in nested blocks
@@ -54,11 +60,11 @@ module.exports = {
     "no-unexpected-multiline": "error",
     // disallow unreachable code after return, throw, continue, and break statements
     "no-unreachable": "error",
-    // disallow control flow statements in finally blocks    	
+    // disallow control flow statements in finally blocks
     "no-unsafe-finally": "error",
-    // disallow negating the left operand of relational operators  	
+    // disallow negating the left operand of relational operators
     "no-unsafe-negation": "error",
-    // enforce valid JSDoc comments    	
+    // enforce valid JSDoc comments
     "valid-jsdoc": "error",
     // enforce comparing typeof expressions against valid strings
     "valid-typeof": "error",
@@ -66,11 +72,11 @@ module.exports = {
     /**
      * Best Practices
      */
-    // enforce return statements in callbacks of array methods	
+    // enforce return statements in callbacks of array methods
     "array-callback-return": "error",
     // enforce the use of variables within the scope they are defined
     "block-scoped-var": "error",
-    // enforce that class methods utilize this    	
+    // enforce that class methods utilize this
     "class-methods-use-this": "error",
     // enforce a maximum cyclomatic complexity allowed in a program
     "complexity": ["error", {
@@ -88,19 +94,19 @@ module.exports = {
     "no-case-declarations": "error",
     // disallow else blocks after return statements in if statements
     "no-else-return": "error",
-    // disallow empty functions    	
+    // disallow empty functions
     "no-empty-function": "error",
-    // disallow unnecessary labels	
+    // disallow unnecessary labels
     "no-extra-label": "error",
     // disallow leading or trailing decimal points in numeric literals
     "no-floating-decimal": "error",
-    // disallow assignments to native objects or read-only global variables    	
+    // disallow assignments to native objects or read-only global variables
     "no-global-assign": "error",
     // disallow shorthand type conversions
     "no-implicit-coercion": "error",
     // disallow variable and function declarations in the global scope
     "no-implicit-globals": "error",
-    // disallow the use of eval()-like methods    	
+    // disallow the use of eval()-like methods
     "no-implied-eval": "error",
     // disallow this keywords outside of classes or class-like objects
     "no-invalid-this": "error",
@@ -110,13 +116,15 @@ module.exports = {
     "no-loop-func": "error",
     // disallow new operators with the Function object
     "no-new-func": "error",
+    // disallow new operators with the String, Number, and Boolean objects
+    "no-new-wrappers": "warn",
     // disallow reassigning function parameters
     "no-param-reassign": "warn",
-    // disallow the use of the __proto__ property	
+    // disallow the use of the __proto__ property
     "no-proto": "error",
-    // disallow variable redeclaration    	
+    // disallow variable redeclaration
     "no-redeclare": "error",
-    // disallow assignment operators in return statements		
+    // disallow assignment operators in return statements
     "no-return-assign": "error",
     // disallow unnecessary return await
     "no-return-await": "error",
@@ -124,30 +132,30 @@ module.exports = {
     "no-self-assign": "error",
     // disallow comparisons where both sides are exactly the same
     "no-self-compare": "error",
-    // disallow throwing literals as exceptions	
+    // disallow throwing literals as exceptions
     "no-throw-literal": "error",
     // disallow unused expressions
     "no-unused-expressions": "error",
-    // disallow unused labels    	
+    // disallow unused labels
     "no-unused-labels": "error",
     // disallow unnecessary calls to .call() and .apply()
     "no-useless-call": "error",
-    // disallow unnecessary concatenation of literals or template literals    	
+    // disallow unnecessary concatenation of literals or template literals
     "no-useless-concat": "error",
-    // disallow unnecessary escape characters    	
+    // disallow unnecessary escape characters
     "no-useless-escape": "error",
-    // disallow redundant return statements    	
+    // disallow redundant return statements
     "no-useless-return": "error",
-    // 
+    //
     "no-warning-comments": ["warn", {
       "terms": ["todo", "fix", "fixme", "bug"],
       "location": "start"
     }],
     // disallow with statements
     "no-with": "error",
-    // require using Error objects as Promise rejection reasons	
+    // require using Error objects as Promise rejection reasons
     "prefer-promise-reject-errors": "error",
-    // disallow async functions which have no await expression    	
+    // disallow async functions which have no await expression
     "require-await": "error",
     // require var declarations be placed at the top of their containing scope
     "vars-on-top": "error",
@@ -166,7 +174,7 @@ module.exports = {
     "no-delete-var": "error",
     // disallow identifiers from shadowing restricted names
     "no-shadow-restricted-names": "error",
-    // disallow the use of undeclared variables unless mentioned in /*global */ comments	
+    // disallow the use of undeclared variables unless mentioned in /*global */ comments
     "no-undef": "error",
     // disallow the use of undefined as an identifier
     "no-undefined": "error",
@@ -192,7 +200,7 @@ module.exports = {
     "brace-style": "error",
     // enforce camelcase naming convention
     "camelcase": "error",
-    // require or disallow trailing commas    	
+    // require or disallow trailing commas
     "comma-dangle": ["error", "never"],
     // enforce consistent spacing before and after commas
     "comma-spacing": ["error", {
@@ -229,7 +237,7 @@ module.exports = {
     }],
     // enforce consistent linebreak style
     "linebreak-style": ["error", "unix"],
-    // enforce a maximum number of parameters in function definitions	
+    // enforce a maximum number of parameters in function definitions
     "max-params": ["error", 5],
     // enforce a maximum number of statements allowed in function blocks
     // "max-statements": ["warn", 10],
@@ -259,7 +267,7 @@ module.exports = {
     }],
     // disallow all tabs
     "no-tabs": "error",
-    // disallow trailing whitespace at the end of lines    	
+    // disallow trailing whitespace at the end of lines
     "no-trailing-spaces": "warn",
     // disallow dangling underscores in identifiers
     "no-underscore-dangle": "error",
@@ -280,7 +288,7 @@ module.exports = {
     // require quotes around object literal property names
     "quote-props": ["error", "consistent-as-needed"],
     // disallow unnecessary semicolon
-    "semi": ["error", "never"],
+    "semi": ["warn", "never"],
     // enforce consistent spacing before and after semicolons
     "semi-spacing": ["error", {
       "before": false,
@@ -312,8 +320,8 @@ module.exports = {
     // require or disallow Unicode byte order mark (BOM)
     "unicode-bom": ["error", "never"],
 
-    /** 
-     * ECMAScript 6 
+    /**
+     * ECMAScript 6
      */
     // require braces around arrow function bodies
     "arrow-body-style": ["error", "as-needed"],
@@ -324,7 +332,7 @@ module.exports = {
       "before": true,
       "after": true
     }],
-    // require super() calls in constructors    	
+    // require super() calls in constructors
     "constructor-super": "error",
     // enforce consistent spacing around * operators in generator functions
     "generator-star-spacing": ["error", {
@@ -333,9 +341,9 @@ module.exports = {
     }],
     // disallow reassigning class members
     "no-class-assign": "error",
-    // disallow arrow functions where they could be confused with comparisons		
+    // disallow arrow functions where they could be confused with comparisons
     "no-confusing-arrow": "error",
-    // disallow reassigning const variables	
+    // disallow reassigning const variables
     "no-const-assign": "error",
     // disallow duplicate class members
     "no-dupe-class-members": "error",
@@ -347,7 +355,7 @@ module.exports = {
     "no-this-before-super": "error",
     // disallow unnecessary computed property keys in object literals
     "no-useless-computed-key": "error",
-    // disallow unnecessary constructors	
+    // disallow unnecessary constructors
     "no-useless-constructor": "error",
     // disallow renaming import, export, and destructured assignments to the same name
     "no-useless-rename": "error",
@@ -355,15 +363,15 @@ module.exports = {
     "no-var": "error",
     // require arrow functions as callbacks
     "prefer-arrow-callback": "error",
-    // require const declarations for variables that are never reassigned after declared    	
+    // require const declarations for variables that are never reassigned after declared
     "prefer-const": "warn",
-    // require destructuring from arrays and/or objects    	
+    // require destructuring from arrays and/or objects
     "prefer-destructuring": "warn",
     // require rest parameters instead of arguments
     "prefer-rest-params": "warn",
-    // require spread operators instead of .apply()    	
+    // require spread operators instead of .apply()
     "prefer-spread": "warn",
-    // require template literals instead of string concatenation    	
+    // require template literals instead of string concatenation
     "prefer-template": "warn",
     // require generator functions to contain yield
     "require-yield": "warn",
@@ -371,7 +379,7 @@ module.exports = {
     "rest-spread-spacing": ["error", "never"],
     //  enforce sorted import declarations within modules
     "sort-imports": "warn",
-    // require symbol descriptions    	
+    // require symbol descriptions
     "symbol-description": "warn",
     // require or disallow spacing around embedded expressions of template strings
     "template-curly-spacing": "error",

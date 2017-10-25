@@ -1,75 +1,70 @@
 <template>
   <div id="app">
-    <div class="topbar">
-      <topbar/>
-    </div>
-    <div class="sidebar">
-      <sidebar/>
-    </div>
+    <!-- Topbar -->
+    <md-toolbar>
+      <md-button class="md-icon-button" @click="toggleLeftSidenav">
+        <md-icon>menu</md-icon>
+      </md-button>
+      <h2 class="md-title">QRC Door</h2>
+    </md-toolbar>
+    <!-- /Topbar -->
+
+    <!-- Left Sidenav -->
+    <md-sidenav class="md-left" ref="leftSidenav">
+      <md-toolbar class="md-large">
+        <div class="md-toolbar-container">
+          <h3 class="md-title">Sidenav content</h3>
+        </div>
+      </md-toolbar>
+      <md-list>
+        <md-list-item v-for="(route, index) in routes" :key="index" :href="`#${route.path}`">
+          <md-icon>{{route.icon}}</md-icon>
+          <span>{{route.name}}</span>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+    <!-- /Left Sidenav -->
+
+    <!-- Router -->
     <div class="router-view">
       <router-view></router-view>
     </div>
+    <!-- /Router -->
   </div>
 </template>
 
 <script>
-import "font-awesome/css/font-awesome.css"
-import "roboto-fontface/css/roboto/roboto-fontface.css"
 
-
-import Sidebar from "@/components/Sidebar"
-import Topbar from "@/components/Topbar"
+import routes from "./router/routes"
 
 export default {
-  components: {
-    Sidebar, Topbar
-  },
   data() {
     return {
-      msg: "Want something new?"
+      routes
     }
   },
   methods: {
-    startHacking() {
-      this.$notify({
-        title: "Shhh",
-        message: "Just be patient...",
-        duration: 6000
-      })
+    toggleLeftSidenav() {
+      this.$refs.leftSidenav.toggle()
+    },
+    toggleRightSidenav() {
+      this.$refs.rightSidenav.toggle()
+    },
+    closeRightSidenav() {
+      this.$refs.rightSidenav.close()
+    },
+    open(ref) {
+      console.log("Opened: $ref")
+    },
+    close(ref) {
+      console.log("Closed: $ref")
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import "~@/styles/conf.scss";
-
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-}
-
-#app {
-  position: absolute;
-
-  .sidebar,
-  .topbar {
-    position: fixed;
-  }
-
-  .sidebar {
-    height: 100%;
-  }
-
-  .topbar {
-    width: calc(100% - #{$sidebar-width});
-    left: $sidebar-width;
-  }
-
-  .router-view {
-    margin-left: $sidebar-width;
-    margin-top: $topbar-height;
-  }
+.router-view {
+  padding: 12px;
 }
 </style>

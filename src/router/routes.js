@@ -22,5 +22,11 @@ export default [
     name: "Cadastro de Funções",
     icon: "home",
     component: (resolve) => require(["@pages/cadastro/funcao"], resolve)
+  },
+  {
+    path: "/cadastro/estrutura",
+    name: "Cadastro de Estrutura",
+    icon: "home",
+    component: (resolve) => require(["@pages/cadastro/estrutura"], resolve)
   }
 ]

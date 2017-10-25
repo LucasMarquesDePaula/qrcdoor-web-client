@@ -2,37 +2,27 @@
   <md-table-card class="index">
     <form @submit.stop.prevent="submit">
       <div>
-        <md-avatar class="md-large">
-          <img :src="pessoa.foto" alt="Foto">
-        </md-avatar>
         <md-layout :md-gutter="true">
           <md-layout md-flex="50">
             <md-input-container>
               <label>Nome</label>
-              <md-input v-model="pessoa.nome"></md-input>
+              <md-input v-model="funcao.descricao"></md-input>
             </md-input-container>
           </md-layout>
 
           <md-layout md-flex="25">
-            <md-checkbox v-model="pessoa.situacao">Ativo</md-checkbox>
+            <md-checkbox v-model="funcao.situacao">Ativo</md-checkbox>
           </md-layout>
         </md-layout>
       </div>
       <md-tabs>
-        <md-tab md-label="Informações Básicas">
-          <informacoes-basicas :model="pessoa" />
-        </md-tab>
 
-        <md-tab md-label="Funções">
-          <funcoes :model="pessoa" />
-        </md-tab>
-
-        <md-tab md-label="Chaves">
-          <chaves :model="pessoa" />
+        <md-tab md-label="Pessoas">
+          <pessoas :model="funcao" />
         </md-tab>
 
         <md-tab md-label="Permissões">
-          <permissoes :model="pessoa" />
+          <permissoes :model="funcao" />
         </md-tab>
       </md-tabs>
     </form>
@@ -46,22 +36,18 @@
 </template>
 
 <script>
-import Chaves from "./Chaves"
-import Funcoes from "./Funcoes"
-import InformacoesBasicas from "./InformacoesBasicas"
 import Permissoes from "./Permissoes"
-import pessoa from "./Pessoa"
+import Pessoas from "./Pessoas"
+import funcao from "./Funcao"
 
 export default {
   components: {
-    Chaves,
-    Funcoes,
-    InformacoesBasicas,
+    Pessoas,
     Permissoes
   },
   data() {
     return {
-      pessoa
+      funcao
     }
   }
 }

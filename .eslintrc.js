@@ -231,7 +231,7 @@ module.exports = {
       "afterColon": true
     }],
     // enforce consistent spacing before and after keywords
-    "keyword-spacing": ["error", {
+    "keyword-spacing": ["warn", {
       "before": true,
       "after": true
     }],
@@ -290,12 +290,12 @@ module.exports = {
     // disallow unnecessary semicolon
     "semi": ["warn", "never"],
     // enforce consistent spacing before and after semicolons
-    "semi-spacing": ["error", {
+    "semi-spacing": ["warn", {
       "before": false,
       "after": true
     }],
     // enforce location of semicolons
-    "semi-style": ["error", "last"],
+    "semi-style": ["warn", "last"],
     // enforce consistent spacing before function definition opening parenthesis
     "space-before-function-paren": ["warn", {
       "anonymous": "always",

@@ -19,6 +19,18 @@
         </md-layout>
       </div>
       <md-tabs>
+        <md-tab md-label="Informações Básicas">
+          <informacoes-basicas :model="model" />
+        </md-tab>
+
+        <md-tab md-label="Funções">
+          <funcoes :model="model" />
+        </md-tab>
+
+        <md-tab md-label="Chaves">
+          <chaves :model="model" />
+        </md-tab>
+
         <md-tab md-label="Permissões">
           <permissoes :model="model" />
         </md-tab>
@@ -29,15 +41,22 @@
         <md-icon>save</md-icon>
       </md-button>
     </md-card-actions>
+
   </md-table-card>
 </template>
 
 <script>
+import Chaves from "./Chaves"
+import Funcoes from "./Funcoes"
+import InformacoesBasicas from "./InformacoesBasicas"
 import Permissoes from "./Permissoes"
-import model from "./model"
+import model from "./Model"
 
 export default {
   components: {
+    Chaves,
+    Funcoes,
+    InformacoesBasicas,
     Permissoes
   },
   data() {

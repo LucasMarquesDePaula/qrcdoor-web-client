@@ -6,23 +6,23 @@
           <md-layout md-flex="50">
             <md-input-container>
               <label>Nome</label>
-              <md-input v-model="funcao.descricao"></md-input>
+              <md-input v-model="model.descricao"></md-input>
             </md-input-container>
           </md-layout>
 
           <md-layout md-flex="25">
-            <md-checkbox v-model="funcao.situacao">Ativo</md-checkbox>
+            <md-checkbox v-model="model.situacao">Ativo</md-checkbox>
           </md-layout>
         </md-layout>
       </div>
       <md-tabs>
 
         <md-tab md-label="Pessoas">
-          <pessoas :model="funcao" />
+          <pessoas :model="model" />
         </md-tab>
 
         <md-tab md-label="Permissões">
-          <permissoes :model="funcao" />
+          <permissoes :model="model" />
         </md-tab>
       </md-tabs>
     </form>
@@ -38,7 +38,7 @@
 <script>
 import Permissoes from "./Permissoes"
 import Pessoas from "./Pessoas"
-import funcao from "./Funcao"
+import model from "./Model"
 
 export default {
   components: {
@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      funcao
+      model
     }
   }
 }

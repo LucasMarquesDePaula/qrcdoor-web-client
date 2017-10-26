@@ -1,14 +1,12 @@
 export default [
   {
     path: "/",
-    name: "Index",
-    icon: "home",
+    hidden: true,
     component: (resolve) => require(["@pages/Index"], resolve)
   },
   {
     path: "/login",
-    name: "Login",
-    icon: "home",
+    hidden: true,
     component: (resolve) => require(["@pages/Login"], resolve)
   },
   {

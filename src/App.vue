@@ -17,7 +17,7 @@
         </div>
       </md-toolbar>
       <md-list>
-        <md-list-item v-for="(route, index) in routes" :key="index" :href="`#${route.path}`">
+        <md-list-item v-for="(route, index) in routes" v-if="!route.hidden" :key="index" :href="`#${route.path}`">
           <md-icon>{{route.icon}}</md-icon>
           <span>{{route.name}}</span>
         </md-list-item>

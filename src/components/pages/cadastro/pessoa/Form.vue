@@ -37,7 +37,7 @@
       </md-tabs>
     </form>
     <md-card-actions>
-      <md-button class="md-fab md-fab-bottom-right ">
+      <md-button class="md-fab md-fab-bottom-right" @click="save">
         <md-icon>save</md-icon>
       </md-button>
     </md-card-actions>
@@ -62,6 +62,11 @@ export default {
   data() {
     return {
       model
+    }
+  },
+  methods: {
+    save() {
+      this.$emit("save")
     }
   }
 }

@@ -25,14 +25,19 @@
     </md-table-header>
 
     <md-table-body>
-      <md-table-row v-for="(row, index) in list" :key="index">
-        <md-table-cell md-numeric>{{row.idpessoa}}</md-table-cell>
-        <md-table-cell>{{row.foto}}</md-table-cell>
-        <md-table-cell>{{row.nome}}</md-table-cell>
-        <md-table-cell>{{row.situacao}}</md-table-cell>
-        <md-table-cell>{{row.documento}}</md-table-cell>
-        <md-table-cell>{{row.fisicaJuridica}}</md-table-cell>
-        <md-table-cell>{{row.login}}</md-table-cell>
+      <md-table-row v-for="(model, index) in list" :key="index">
+        <md-table-cell md-numeric>{{model.idpessoa}}</md-table-cell>
+        <md-table-cell>{{model.foto}}</md-table-cell>
+        <md-table-cell>{{model.nome}}</md-table-cell>
+        <md-table-cell>{{model.situacao}}</md-table-cell>
+        <md-table-cell>{{model.documento}}</md-table-cell>
+        <md-table-cell>{{model.fisicaJuridica}}</md-table-cell>
+        <md-table-cell>{{model.login}}</md-table-cell>
+        <md-table-cell>
+          <md-button class="md-icon-button" @click="edit(model)">
+            <md-icon>edit</md-icon>
+          </md-button>
+        </md-table-cell>
       </md-table-row>
     </md-table-body>
   </md-table>
@@ -76,6 +81,9 @@ export default {
     },
     onPagination() {
       console.log(arguments)
+    },
+    edit(model) {
+      this.$emit("edit", model)
     }
   }
 }

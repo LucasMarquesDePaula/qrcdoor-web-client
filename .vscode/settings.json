@@ -1,7 +1,11 @@
 {
-    "vetur.format.js.InsertSpaceBeforeFunctionParenthesis": false,
-    "git.enableSmartCommit": true,
-    "files.eol": "\n",
-    "editor.tabSize": 2,
-    "window.zoomLevel": 0
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "prettier.eslintIntegration": true,
+  "prettier.semi": false,
+  "prettier.stylelintIntegration": true,
+  "jshint.options": {
+    "esversion": 6
+  }
 }

@@ -13,16 +13,17 @@
 </template>
 
 <script>
-import VDialog from "../Dialog"
-import VGrid from "./Grid"
-import VForm from "./Form"
+import Dialog from "../Dialog"
 import objectHash from "object-hash"
 
 export default {
   components: {
-    VDialog,
-    VForm,
-    VGrid
+    Dialog
+  },
+  props: {
+    form: {
+      type: Object
+    }
   },
   data() {
     return {

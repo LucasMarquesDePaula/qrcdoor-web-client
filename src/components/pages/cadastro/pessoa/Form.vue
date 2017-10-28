@@ -1,5 +1,16 @@
 <template>
   <md-table-card class="index">
+    <md-toolbar>
+      <md-button class="md-icon-button" @click="back">
+        <md-icon>arrow_back</md-icon>
+      </md-button>
+
+      <h2 class="md-title" style="flex: 1">Pessoa</h2>
+
+      <md-button class="md-icon-button" @click="remove">
+        <md-icon>delete_forever</md-icon>
+      </md-button>
+    </md-toolbar>
     <form @submit.stop.prevent="submit">
       <div>
         <md-avatar class="md-large">
@@ -37,11 +48,10 @@
       </md-tabs>
     </form>
     <md-card-actions>
-      <md-button class="md-fab md-fab-bottom-right" @click="save">
+      <md-button class="md-fab" @click="save">
         <md-icon>save</md-icon>
       </md-button>
     </md-card-actions>
-
   </md-table-card>
 </template>
 
@@ -65,8 +75,14 @@ export default {
     }
   },
   methods: {
+    back() {
+      this.$emit("back")
+    },
     save() {
       this.$emit("save")
+    },
+    remove() {
+      this.$emit("remove")
     }
   }
 }

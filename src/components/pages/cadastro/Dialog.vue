@@ -6,10 +6,10 @@
       <div>{{contentHtml}}</div>
       <md-dialog-content>
         <div>{{content}}</div>
-        <grid-loader v-if="loading"></grid-loader>
+        <grid-loader v-if="loading" color="#3F51B5"></grid-loader>
       </md-dialog-content>
     </md-dialog>
-    <md-dialog-confirm ref="confirm" :md-title="title" :md-content-html="contentHtml" :md-ok-text="ok" :md-cancel-text="cancel" @open="onOpen" @close="onClose"></md-dialog-confirm>
+    <md-dialog-confirm ref="confirm" :md-title="title" :md-content-html="contentHtml" :md-ok-text="okText" :md-cancel-text="cancelText" @open="onOpen" @close="onClose"></md-dialog-confirm>
   </div>
 </template>
 
@@ -66,3 +66,9 @@ export default {
   }
 }
 </script>
+<<style lang="scss" scoped>
+.md-dialog-content {
+  margin: auto;
+}
+</style>
+

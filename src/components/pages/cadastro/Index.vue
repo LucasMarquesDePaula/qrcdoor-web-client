@@ -2,10 +2,10 @@
   <div>
     <md-tabs class="no-navigation">
       <md-tab :md-active="tab === 'grid'">
-        <v-grid @edit="edit" />
+        <v-grid :title="title" @edit="onGridEdit" />
       </md-tab>
       <md-tab :md-active="tab === 'form'">
-        <v-form :model="model" @save="onFormSave" @back="onFormBack" @remove="onFormRemove" />
+        <v-form :title="title" :model="model" @save="onFormSave" @back="onFormBack" @remove="onFormRemove" />
       </md-tab>
     </md-tabs>
     <v-dialog ref="dialog" :title="dialog.title" @close="dialog.onClose" />
@@ -13,12 +13,15 @@
 </template>
 
 <script>
-import Dialog from "../Dialog"
+import VDialog from "./Dialog"
+import isEmpty from "lodash/isEmpty"
 import objectHash from "object-hash"
+
+const EMPTY = {}
 
 export default {
   components: {
-    Dialog
+    VDialog
   },
   props: {
     form: {
@@ -33,7 +36,7 @@ export default {
         }
       },
       modelHash: null,
-      model: null
+      model: EMPTY
     }
   },
   methods: {
@@ -56,7 +59,7 @@ export default {
             // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
             ui.alert()
             dialog.title = "Salvo com sucesso!"
-            this.model = null
+            this.model = EMPTY
           }, 2000)
         }
       }
@@ -64,7 +67,7 @@ export default {
     onFormBack() {
       if (this.modelHash === objectHash(this.model)) {
         // Não houve alteração
-        this.model = null
+        this.model = EMPTY
         return
       }
 
@@ -75,7 +78,7 @@ export default {
       dialog.title = "Voltar a tela anterior ?"
       dialog.onClose = state => {
         if (state === "ok") {
-          this.model = null
+          this.model = EMPTY
         }
       }
     },
@@ -98,19 +101,19 @@ export default {
             // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
             ui.alert()
             dialog.title = "Removido com sucesso!"
-            this.model = null
+            this.model = EMPTY
           }, 2000)
         }
       }
     },
-    edit(model) {
+    onGridEdit(model) {
       this.modelHash = objectHash(model)
       this.model = model
     }
   },
   computed: {
     tab() {
-      return this.model ? "form" : "grid"
+      return isEmpty(this.model) ? "grid" : "form"
     }
   }
 }
@@ -118,7 +121,7 @@ export default {
 
 <style lang="scss">
 .md-tabs.no-navigation {
-  .md-tabs-navigation {
+  > .md-tabs-navigation {
     display: none;
   }
 }

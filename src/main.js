@@ -6,12 +6,13 @@ import "vue-material/dist/vue-material.css"
 import App from "./App"
 import Vue from "vue"
 import VueMaterial from "vue-material"
-
+import VueTheMask from "vue-the-mask"
 import router from "./router"
 
 Vue.config.productionTip = false
 
 Vue.use(VueMaterial)
+Vue.use(VueTheMask)
 
 /* eslint-disable no-new */
 new Vue({

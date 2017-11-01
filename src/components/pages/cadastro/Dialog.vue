@@ -2,10 +2,8 @@
   <div>
     <md-dialog-alert ref="alert" :md-title="title" :md-content-html="contentHtml" :md-content="content" :md-ok-text="'OK'"></md-dialog-alert>
     <md-dialog ref="dialog" :md-esc-to-close="false" :md-click-outside-to-close="false">
-      <md-dialog-title>{{title}}</md-dialog-title>
-      <div>{{contentHtml}}</div>
+      <md-dialog-title>Aplicando Alterações</md-dialog-title>
       <md-dialog-content>
-        <div>{{content}}</div>
         <grid-loader v-if="loading" color="#3F51B5"></grid-loader>
       </md-dialog-content>
     </md-dialog>

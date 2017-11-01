@@ -17,8 +17,8 @@
         <md-input-container>
           <label>Tipo</label>
           <md-select v-model="form.tipo">
-            <md-option value="smartphone">Arial</md-option>
-            <md-option value="Senha">Calibri</md-option>
+            <md-option value="smartphone">Smartphone</md-option>
+            <md-option value="qrcode">QR Code</md-option>
           </md-select>
         </md-input-container>
       </md-layout>
@@ -58,7 +58,18 @@ export default {
   props: ["model"],
   data() {
     return {
-      form: {
+      form: {}
+    }
+  },
+  methods: {
+    add() {
+      // TODO adicionar validação
+      if (!this.model.chaves) {
+        this.model.chaves = []
+      }
+      if (this.form) {
+        this.model.chaves.push(this.form)
+        this.form = {}
       }
     }
   }

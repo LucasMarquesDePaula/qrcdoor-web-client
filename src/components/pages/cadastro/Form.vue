@@ -1,6 +1,9 @@
 <template>
   <md-table-card class="index">
-    <md-toolbar>
+    <form @submit.stop.prevent="submit">
+      <slot></slot>
+    </form>
+    <md-card-actions>
       <md-button class="md-icon-button" @click="$emit('back', $data)">
         <md-icon>arrow_back</md-icon>
       </md-button>
@@ -8,11 +11,6 @@
       <md-button class="md-icon-button" @click="$emit('remove', $data)">
         <md-icon>delete_forever</md-icon>
       </md-button>
-    </md-toolbar>
-    <form @submit.stop.prevent="submit">
-      <slot></slot>
-    </form>
-    <md-card-actions>
       <md-button class="md-fab" @click="$emit('save', $data)">
         <md-icon>save</md-icon>
       </md-button>

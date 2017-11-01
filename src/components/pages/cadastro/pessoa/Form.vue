@@ -2,7 +2,7 @@
   <v-form @save="$emit('save', $data)" @back="$emit('back', $data)" @remove="$emit('remove', $data)">
     <div>
       <md-avatar class="md-large">
-        <img :src="model.foto" alt="Foto">
+        <img :src="model.foto || avatar" alt="Foto">
       </md-avatar>
       <md-layout :md-gutter="true">
         <md-layout md-flex="50">
@@ -44,6 +44,8 @@ import VFuncoes from "./Funcoes"
 import VInformacoesBasicas from "./InformacoesBasicas"
 import VPermissoes from "./Permissoes"
 
+import avatar from "@images/avatar.png"
+
 export default {
   components: {
     VChaves,
@@ -52,6 +54,11 @@ export default {
     VInformacoesBasicas,
     VPermissoes
   },
-  props: ["model"]
+  props: ["model"],
+  data() {
+    return {
+      avatar
+    }
+  }
 }
 </script>

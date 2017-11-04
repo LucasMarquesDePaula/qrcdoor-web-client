@@ -27,20 +27,22 @@
 
     <!-- Router -->
     <div class="router-view">
-      <router-view></router-view>
+      <transition :name="transition">
+        <router-view></router-view>
+      </transition>
     </div>
     <!-- /Router -->
   </div>
 </template>
 
 <script>
-
 import routes from "./router/routes"
 
 export default {
   data() {
     return {
-      routes
+      routes,
+      transition: "fade"
     }
   },
   methods: {
@@ -58,6 +60,19 @@ export default {
     },
     close(ref) {
       console.log("Closed: $ref")
+    }
+  },
+  watch: {
+    $route(to, from) {
+      const toDepth = to.path.split("/").length
+      const fromDepth = from.path.split("/").length
+      if (toDepth === fromDepth) {
+        this.transition = "fade"
+      } else if (toDepth < fromDepth) {
+        this.transition = "slide-right"
+      } else {
+        this.transition = "slide-left"
+      }
     }
   }
 }

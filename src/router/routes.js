@@ -1,5 +1,10 @@
 export default [
   {
+    path: "*",
+    hidden: true,
+    component: (resolve) => require(["@pages/Error404"], resolve)
+  },
+  {
     path: "/",
     hidden: true,
     component: (resolve) => require(["@pages/Index"], resolve)

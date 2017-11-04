@@ -47,7 +47,7 @@ export default {
       dialog.title = "Salvar as alterações?"
       ui.confirm()
 
-      dialog.onClose = state => {
+      dialog.onClose = (state) => {
         if (state === "ok") {
           // Etapa 2: Bloqueia a tela e Salva os dados
           dialog.title = "Salvando..."
@@ -76,7 +76,7 @@ export default {
 
       ui.confirm()
       dialog.title = "Voltar a tela anterior ?"
-      dialog.onClose = state => {
+      dialog.onClose = (state) => {
         if (state === "ok") {
           this.model = {}
           this.tab = "grid"
@@ -91,7 +91,7 @@ export default {
       dialog.title = "Remover o registro?"
       ui.confirm()
 
-      dialog.onClose = state => {
+      dialog.onClose = (state) => {
         if (state === "ok") {
           // Etapa 2: Bloqueia a tela e Salva os dados
           dialog.title = "Removendo..."
@@ -109,7 +109,7 @@ export default {
       }
     },
     onGridAdd() {
-      const model = {};
+      const model = {}
       this.modelHash = objectHash(model)
       this.model = model
       this.tab = "form"

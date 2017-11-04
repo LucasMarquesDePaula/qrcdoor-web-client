@@ -5,9 +5,7 @@
         <md-input-container>
           <label>Estrutura</label>
           <md-select v-model="form.estrutura">
-            <md-option v-for="(option, index) in [ { id: 1, name: 'a' }, { id: 2, name: 'b' }, { id: 3, name: 'c' } ]"
-              :key="index"
-              :value="option">
+            <md-option v-for="(option, index) in [ { id: 1, name: 'a' }, { id: 2, name: 'b' }, { id: 3, name: 'c' } ]" :key="index" :value="option">
               {{ option.name }}
             </md-option>
           </md-select>
@@ -74,9 +72,7 @@ export default {
     }
   },
   methods: {
-    remove(array, object) {
-
-    }
+    remove(array, object) {}
   }
 }
 </script>

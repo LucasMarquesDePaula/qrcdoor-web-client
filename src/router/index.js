@@ -4,6 +4,10 @@ import routes from "./routes"
 
 Vue.use(Router)
 
-export default new Router({
-  routes
+const router = new Router({
+  routes,
+  saveScrollPosition: true,
+  history: true
 })
+
+export default router

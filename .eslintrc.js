@@ -1,26 +1,24 @@
 // http://eslint.org/docs/user-guide/configuring
 
 module.exports = {
-  "root": true,
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module"
+  root: true,
+  parser: "babel-eslint",
+  parserOptions: {
+    sourceType: "module"
   },
-  "env": {
-    "browser": true,
+  env: {
+    browser: true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  "extends": "standard",
+  extends: "standard",
   // required to lint *.vue files
-  "plugins": [
-    "html"
-  ],
-  "globals": {
-    "$": true,
-    "moment": true
+  plugins: ["html"],
+  globals: {
+    $: true,
+    moment: true
   },
   // add your custom rules here
-  "rules": {
+  rules: {
     /**
      * Possible warns
      */
@@ -79,13 +77,16 @@ module.exports = {
     // enforce that class methods utilize this
     "class-methods-use-this": "warn",
     // enforce a maximum cyclomatic complexity allowed in a program
-    "complexity": ["warn", {
-      "max": 10
-    }],
+    complexity: [
+      "warn",
+      {
+        max: 10
+      }
+    ],
     // require return statements to either always or never specify values
     "consistent-return": "warn",
     // enforce consistent brace style for all control statements
-    "curly": "warn",
+    curly: "warn",
     // require default cases in switch statements
     "default-case": "warn",
     // enforce consistent newlines before and after dots
@@ -147,10 +148,13 @@ module.exports = {
     // disallow redundant return statements
     "no-useless-return": "warn",
     //
-    "no-warning-comments": ["warn", {
-      "terms": ["todo", "fix", "fixme", "bug"],
-      "location": "start"
-    }],
+    "no-warning-comments": [
+      "warn",
+      {
+        terms: ["todo", "fix", "fixme", "bug"],
+        location: "start"
+      }
+    ],
     // disallow with statements
     "no-with": "warn",
     // require using warn objects as Promise rejection reasons
@@ -165,7 +169,7 @@ module.exports = {
      * Strict Mode
      */
     // require or disallow strict mode directives
-    "strict": ["warn", "global"],
+    strict: ["warn", "global"],
 
     /**
      * Variables
@@ -185,9 +189,12 @@ module.exports = {
      * Stylistic Issues
      */
     // enforce linebreaks after opening and before closing array brackets
-    "array-bracket-newline": ["warn", {
-      "multiline": true
-    }],
+    "array-bracket-newline": [
+      "warn",
+      {
+        multiline: true
+      }
+    ],
     // enforce consistent spacing inside array brackets
     "array-bracket-spacing": ["warn", "never"],
     // enforce line breaks after each array element
@@ -199,14 +206,17 @@ module.exports = {
     // enforce consistent brace style for blocks
     "brace-style": "warn",
     // enforce camelcase naming convention
-    "camelcase": "warn",
+    camelcase: "warn",
     // require or disallow trailing commas
     "comma-dangle": ["warn", "never"],
     // enforce consistent spacing before and after commas
-    "comma-spacing": ["warn", {
-      "before": false,
-      "after": true
-    }],
+    "comma-spacing": [
+      "warn",
+      {
+        before: false,
+        after: true
+      }
+    ],
     // enforce consistent comma style
     "comma-style": ["warn", "last"],
     // enforce consistent spacing inside computed property brackets
@@ -220,21 +230,27 @@ module.exports = {
     // require function names to match the name of the variable or property to which they are assigned
     "func-name-matching": "warn",
     // enforce the consistent use of either function declarations or expressions
-    "func-style": ["warn", "declaration"],
+    "func-style": ["warn", "expression"],
     // enforce consistent indentation
-    "indent": ["warn", 2],
+    indent: ["warn", 2],
     // jsx-quotes
     "jsx-quotes": ["warn", "prefer-double"],
     // enforce consistent spacing between keys and values in object literal properties
-    "key-spacing": ["warn", {
-      "beforeColon": false,
-      "afterColon": true
-    }],
+    "key-spacing": [
+      "warn",
+      {
+        beforeColon: false,
+        afterColon: true
+      }
+    ],
     // enforce consistent spacing before and after keywords
-    "keyword-spacing": ["warn", {
-      "before": true,
-      "after": true
-    }],
+    "keyword-spacing": [
+      "warn",
+      {
+        before: true,
+        after: true
+      }
+    ],
     // enforce consistent linebreak style
     "linebreak-style": ["warn", "unix"],
     // enforce a maximum number of parameters in function definitions
@@ -242,29 +258,41 @@ module.exports = {
     // enforce a maximum number of statements allowed in function blocks
     // "max-statements": ["warn", 10],
     // enforce a maximum number of statements allowed per line
-    "max-statements-per-line": ["warn", {
-      "max": 1
-    }],
+    "max-statements-per-line": [
+      "warn",
+      {
+        max: 1
+      }
+    ],
     // require constructor names to begin with a capital letter
-    "new-cap": ["warn", {
-      "newIsCap": true
-    }],
+    "new-cap": [
+      "warn",
+      {
+        newIsCap: true
+      }
+    ],
     // require parentheses when invoking a constructor with no arguments
     "new-parens": "warn",
     // require a newline after each call in a method chain
-    "newline-per-chained-call": ["warn", {
-      "ignoreChainWithDepth": 2
-    }],
+    "newline-per-chained-call": [
+      "warn",
+      {
+        ignoreChainWithDepth: 2
+      }
+    ],
     // disallow if statements as the only statement in else blocks
     "no-lonely-if": "warn",
     // disallow mixed spaces and tabs for indentation
     "no-mixed-spaces-and-tabs": "warn",
     // disallow multiple empty lines
-    "no-multiple-empty-lines": ["warn", {
-      "max": 2,
-      "maxBOF": 1,
-      "maxEOF": 1
-    }],
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        max: 2,
+        maxBOF: 1,
+        maxEOF: 1
+      }
+    ],
     // disallow all tabs
     "no-tabs": "warn",
     // disallow trailing whitespace at the end of lines
@@ -284,24 +312,30 @@ module.exports = {
     // require or disallow padding within blocks
     "padded-blocks": ["warn", "never"],
     // enforce the consistent use of either backticks, double, or single quotes
-    "quotes": ["warn", "double"],
+    quotes: ["warn", "double"],
     // require quotes around object literal property names
     "quote-props": ["warn", "consistent-as-needed"],
     // disallow unnecessary semicolon
-    "semi": ["warn", "never"],
+    semi: ["warn", "never"],
     // enforce consistent spacing before and after semicolons
-    "semi-spacing": ["warn", {
-      "before": false,
-      "after": true
-    }],
+    "semi-spacing": [
+      "warn",
+      {
+        before: false,
+        after: true
+      }
+    ],
     // enforce location of semicolons
     "semi-style": ["warn", "last"],
     // enforce consistent spacing before function definition opening parenthesis
-    "space-before-function-paren": ["warn", {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "never"
-    }],
+    "space-before-function-paren": [
+      "warn",
+      {
+        anonymous: "always",
+        named: "never",
+        asyncArrow: "never"
+      }
+    ],
     // enforce consistent spacing inside parentheses
     "space-in-parens": ["warn", "never"],
     // require spacing around infix operators
@@ -311,10 +345,13 @@ module.exports = {
     // enforce consistent spacing after the // or /* in a comment
     "spaced-comment": ["warn", "always"],
     // enforce spacing around colons of switch statements
-    "switch-colon-spacing": ["warn", {
-      "after": true,
-      "before": false
-    }],
+    "switch-colon-spacing": [
+      "warn",
+      {
+        after: true,
+        before: false
+      }
+    ],
     // require or disallow spacing between template tags and their literals
     "template-tag-spacing": ["warn", "never"],
     // require or disallow Unicode byte order mark (BOM)
@@ -328,17 +365,23 @@ module.exports = {
     // require parentheses around arrow function arguments
     "arrow-parens": ["warn", "always"],
     // enforce consistent spacing before and after the arrow in arrow functions
-    "arrow-spacing": ["warn", {
-      "before": true,
-      "after": true
-    }],
+    "arrow-spacing": [
+      "warn",
+      {
+        before: true,
+        after: true
+      }
+    ],
     // require super() calls in constructors
     "constructor-super": "warn",
     // enforce consistent spacing around * operators in generator functions
-    "generator-star-spacing": ["warn", {
-      "before": true,
-      "after": false
-    }],
+    "generator-star-spacing": [
+      "warn",
+      {
+        before: true,
+        after: false
+      }
+    ],
     // disallow reassigning class members
     "no-class-assign": "warn",
     // disallow arrow functions where they could be confused with comparisons

@@ -54,16 +54,18 @@ export default {
     ...mapActions(["login", "logout"]),
     submit() {
       const self = this
+
       const auth = {
-        username: "admin",
-        password: "1234"
+        username: self.username,
+        password: self.password
       }
+
       service
         .request({
           url: "/login",
-          method: "get",
-          auth
-          // data: auth
+          method: "post",
+          auth,
+          data: auth
         })
         .then(response => {
           self.login(auth)
@@ -72,6 +74,7 @@ export default {
         })
         .catch(error => {
           console.error(error)
+          console.error("Logout")
           self.logout()
           // self.$store.dispatch("logout")
         })

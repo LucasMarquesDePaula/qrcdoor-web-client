@@ -6,9 +6,11 @@ const state = {
 
 const mutations = {
   [LOGIN](state, auth) {
+    // console.log("Login")
     state.auth = auth
   },
   [LOGOUT](state) {
+    // console.log("Logout")
     state.auth = null
   }
 }

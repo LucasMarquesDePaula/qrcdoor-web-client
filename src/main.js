@@ -8,20 +8,16 @@ import Vue from "vue"
 import VueMaterial from "vue-material"
 import VueTheMask from "vue-the-mask"
 import Vuelidate from "vuelidate"
+import isEmpty from "lodash/isEmpty"
 import { mapGetters } from "vuex"
 import router from "@router"
 import store from "@store"
-import { sync } from "vuex-router-sync"
 
 Vue.config.productionTip = false
 
 Vue.use(VueMaterial)
 Vue.use(VueTheMask)
 Vue.use(Vuelidate)
-
-const unsync = sync(store, router)
-
-console.log(store)
 
 /* eslint-disable no-new */
 new Vue({
@@ -40,16 +36,22 @@ new Vue({
     ...mapGetters(["auth", "route"])
   },
   created() {
-    const self = this
     const loginPath = "/login"
-    self.$router.beforeEach((from, to, next) => {
-      next(!self.auth && from.path !== loginPath ? loginPath : true)
+    const auth = isEmpty(this.auth)
+    const currentPath = this.$router.currentRoute.path
+
+    this.$router.beforeEach((from, to, next) => {
+      // if (from.path === loginPath) {
+      //   // Se estiver logado então desloga
+      //   next(auth ? "/logout" : true)
+      //   return
+      // }
+      // next(auth ? true : loginPath)
+      next()
     })
-    if (!this.auth && this.route.path !== loginPath) {
-      router.push({ name: "login" })
+
+    if (!auth && currentPath !== loginPath) {
+      // router.push({ name: "login" })
     }
-  },
-  destroyed() {
-    unsync()
   }
 })

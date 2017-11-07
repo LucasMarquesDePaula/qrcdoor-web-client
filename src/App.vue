@@ -5,7 +5,8 @@
       <md-button class="md-icon-button" @click="toggleLeftSidenav">
         <md-icon>menu</md-icon>
       </md-button>
-      <h2 class="md-title">QRC Door</h2>
+      <img class="logo" src="/static/images/logo.png" />
+      <!-- <h2 class="md-title">QRC Door</h2> -->
     </md-toolbar>
     <!-- /Topbar -->
 
@@ -78,8 +79,11 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scopped>
 .router-view {
   padding: 12px;
+}
+img.logo {
+  height: 46px;
 }
 </style>

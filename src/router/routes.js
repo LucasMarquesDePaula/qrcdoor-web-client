@@ -16,20 +16,26 @@ export default [
   },
   {
     path: "/cadastro/pessoa",
-    name: "Cadastro de Pessoas",
-    icon: "home",
+    name: "Pessoas",
+    icon: "people",
     component: (resolve) => require(["@pages/cadastro/pessoa"], resolve)
   },
   {
     path: "/cadastro/funcao",
-    name: "Cadastro de Funções",
-    icon: "home",
+    name: "Funções",
+    icon: "settings",
     component: (resolve) => require(["@pages/cadastro/funcao"], resolve)
   },
   {
-    path: "/cadastro/estrutura",
-    name: "Cadastro de Estrutura",
-    icon: "home",
-    component: (resolve) => require(["@pages/cadastro/estrutura"], resolve)
+    path: "/cadastro/cofre",
+    name: "Cofres",
+    icon: "lock",
+    component: (resolve) => require(["@pages/cadastro/cofre"], resolve)
+  },
+  {
+    path: "/cadastro/ambiente",
+    name: "Ambientes",
+    icon: "lock",
+    component: (resolve) => require(["@pages/cadastro/ambiente"], resolve)
   }
 ]

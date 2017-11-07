@@ -35,7 +35,8 @@ export default {
       },
       modelHash: null,
       model: {},
-      tab: "form"
+      // tab: "form"
+      tab: "grid"
     }
   },
   methods: {

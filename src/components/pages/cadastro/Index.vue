@@ -2,7 +2,7 @@
   <div>
     <md-tabs class="no-navigation">
       <md-tab :md-active="tab === 'grid'">
-        <v-grid :title="title" @edit="onGridEdit" @add="onGridAdd" />
+        <v-grid :list="list" :filter="filter" :title="title" @edit="onGridEdit" @add="onGridAdd" />
       </md-tab>
       <md-tab :md-active="tab === 'form'">
         <v-form :title="title" :model="model" @save="onFormSave" @back="onFormBack" @remove="onFormRemove" />
@@ -15,17 +15,21 @@
 <script>
 import VDialog from "./Dialog"
 // import isEmpty from "lodash/isEmpty"
-import objectHash from "object-hash"
+import { mapGetters } from "vuex"
+import hash from "object-hash"
+import service from "@service"
+import store from "@store"
 
 export default {
   components: {
     VDialog
   },
-  props: {
-    form: {
-      type: Object
-    }
-  },
+  store,
+  // props: {
+  //   form: {
+  //     type: Object
+  //   }
+  // },
   data() {
     return {
       dialog: {
@@ -35,9 +39,14 @@ export default {
       },
       modelHash: null,
       model: {},
-      // tab: "form"
-      tab: "grid"
+      filter: {},
+      list: [],
+      tab: "form"
+      // tab: "grid"
     }
+  },
+  computed: {
+    ...mapGetters(["auth"])
   },
   methods: {
     onFormSave() {
@@ -48,24 +57,30 @@ export default {
       dialog.title = "Salvar as alterações?"
       ui.confirm()
 
-      dialog.onClose = (state) => {
+      dialog.onClose = state => {
         if (state === "ok") {
           // Etapa 2: Bloqueia a tela e Salva os dados
           dialog.title = "Salvando..."
           ui.dialog()
 
-          // Delay simulando troca de dados com o servidor
-          setTimeout(() => {
-            // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
-            ui.alert()
-            dialog.title = "Salvo com sucesso!"
-            this.tab = "grid"
-          }, 2000)
+          this.service
+            .post("", this.model, { auth: this.auth })
+            .then(response => {
+              // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
+              ui.alert()
+              dialog.title = "Salvo com sucesso!"
+              this.tab = "grid"
+            })
+            .catch(error => {
+              ui.alert()
+              dialog.title = "Erro ao salvar!"
+              console.error(error)
+            })
         }
       }
     },
     onFormBack() {
-      if (this.modelHash === objectHash(this.model)) {
+      if (this.modelHash === hash(this.model)) {
         // Não houve alteração
         this.model = {}
         this.tab = "grid"
@@ -77,7 +92,7 @@ export default {
 
       ui.confirm()
       dialog.title = "Voltar a tela anterior ?"
-      dialog.onClose = (state) => {
+      dialog.onClose = state => {
         if (state === "ok") {
           this.model = {}
           this.tab = "grid"
@@ -92,7 +107,7 @@ export default {
       dialog.title = "Remover o registro?"
       ui.confirm()
 
-      dialog.onClose = (state) => {
+      dialog.onClose = state => {
         if (state === "ok") {
           // Etapa 2: Bloqueia a tela e Salva os dados
           dialog.title = "Removendo..."
@@ -111,12 +126,12 @@ export default {
     },
     onGridAdd() {
       const model = {}
-      this.modelHash = objectHash(model)
+      this.modelHash = hash(model)
       this.model = model
       this.tab = "form"
     },
     onGridEdit(model) {
-      this.modelHash = objectHash(model)
+      this.modelHash = hash(model)
       this.model = model
       this.tab = "form"
     }

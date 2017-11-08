@@ -36,7 +36,7 @@
         <slot name="filter"></slot>
       </md-dialog-content>
 
-      <md-table-pagination :md-size="size" :md-total="total" :md-page="page" md-label="Linhas" md-separator="de" :md-page-options="[5, 10, 25, 50]" @pagination="onPagination"></md-table-pagination>
+      <md-table-pagination :md-size="pagination.size" :md-total="pagination.total" :md-page="pagination.page" md-label="Linhas" md-separator="de" :md-page-options="[5, 10, 25, 50]" @pagination="onPagination"></md-table-pagination>
 
       <md-dialog-actions>
         <md-button class="md-primary md-raised" @click="reload">Aplicar</md-button>
@@ -55,8 +55,6 @@
 
 <script>
 import GridLoader from "vue-spinner/src/GridLoader"
-import { mapGetters } from "vuex"
-import service from "@service"
 
 export default {
   components: {
@@ -73,10 +71,15 @@ export default {
         return []
       }
     },
-    url: {
-      default: ""
+    pagination: {
+      default() {
+        return {}
+      }
     },
     title: {
+      default: ""
+    },
+    url: {
       default: ""
     }
   },
@@ -87,20 +90,20 @@ export default {
       total: 100
     }
   },
-  computed: {
-    ...mapGetters(["auth"])
-  },
+  // computed: {
+  //   ...mapGetters(["auth"])
+  // },
   methods: {
     reload() {
       // this.$refs.filter.close()
       // this.$refs.loading.open()
-      console.log(this.auth)
-      service.get(this.url, {
-        auth: this.auth,
-        params: {
-          page: 12345
-        }
-      })
+      // console.log(this.auth)
+      // this.service.get(this.url, {
+      //   auth: this.auth,
+      //   params: {
+      //     page: 12345
+      //   }
+      // })
     },
 
     // Events

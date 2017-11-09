@@ -65,20 +65,32 @@ import VGrid from "../Grid"
 import model from "./Model"
 
 export default {
+  props: {
+    list: {
+      default() {
+        return []
+      }
+    },
+    filter: {
+      default() {
+        return {}
+      }
+    }
+  },
   components: {
     VGrid
   },
-  data() {
-    return {
-      filter: {},
-      list: []
-    }
-  },
-  computed: {
-    // list() {
-    //   return list
-    // }
-  },
+  // data() {
+  //   return {
+  //     // filter: {}
+  //     // list: []
+  //   }
+  // },
+  // computed: {
+  //   list() {
+  //     return list
+  //   }
+  // },
   filters: {
     natureza(value) {
       return value === "F" ? "Física" : value === "J" ? "Júrídica" : ""

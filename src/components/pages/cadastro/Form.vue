@@ -1,29 +1,48 @@
-<template>
-  <md-table-card>
-    <form @submit.stop.prevent="submit">
-      <slot></slot>
-    </form>
-    <md-card-actions>
-      <md-button class="md-icon-button" @click="$emit('back', $data)">
+<script>
+const FormActions = {
+  template: `
+    <div>
+      <md-button class="md-icon-button" @click.prevent.stop="$emit('back', $data)">
         <md-icon>arrow_back</md-icon>
         <md-tooltip md-direction="top">Voltar</md-tooltip>
       </md-button>
-      <h2 class="md-title" style="flex: 1">{{title}}</h2>
-      <md-button class="md-icon-button" @click="$emit('remove', $data)">
+      <md-button class="md-icon-button" @click.prevent.stop="$emit('remove', $data)">
         <md-icon>delete_forever</md-icon>
         <md-tooltip md-direction="top">Deletar</md-tooltip>
       </md-button>
-      <md-button class="md-fab" @click="$emit('save', $data)">
+      <md-button class="md-fab" @click.prevent.stop="$emit('save', $data)">
         <md-icon>save</md-icon>
         <md-tooltip md-direction="top">Salvar</md-tooltip>
       </md-button>
-    </md-card-actions>
-  </md-table-card>
-</template>
+    </div>
+  `
+}
 
-<script>
 export default {
-  props: ["model", "title"]
+  components: {
+    FormActions
+  },
+  props: ["model", "title"],
+  methods: {
+    save() {
+      return new Promise((resolve, reject) => {
+        try {
+          this.doSave(resolve, reject)
+        } catch (error) {
+          reject(error)
+        }
+      })
+    },
+    delete() {
+      return new Promise((resolve, reject) => {
+        try {
+          this.doDelete(resolve, reject)
+        } catch (error) {
+          reject(error)
+        }
+      })
+    }
+  }
 }
 </script>
 

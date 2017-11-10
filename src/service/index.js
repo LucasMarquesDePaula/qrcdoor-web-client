@@ -1,12 +1,33 @@
 import axios from "axios"
+import config from "./config"
 
-export default axios.create({
-  // baseURL: "http://192.168.15.11:8070",
-  baseURL: "http://localhost:8070",
-  method: "POST",
-  // headers: {
-  // "X-Custom-Header": "foobar",
-  // "Content-Type": "application/x-www-form-urlencoded"
-  // },
-  timeout: 1000
-})
+export default (url) => {
+  const service = axios.create(config)
+
+  return {
+    request(config) {
+      return service.request(config)
+    },
+    get(config) {
+      return service.get(url, config)
+    },
+    delete(config) {
+      return service.delete(url, config)
+    },
+    head(config) {
+      return service.head(url, config)
+    },
+    options(config) {
+      return service.options(url, config)
+    },
+    post(data, config) {
+      return service.post(url, data, config)
+    },
+    put(data, config) {
+      return service.put(url, data, config)
+    },
+    patch(data, config) {
+      return service.patch(url, data, config)
+    }
+  }
+}

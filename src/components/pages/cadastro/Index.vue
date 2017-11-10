@@ -2,13 +2,13 @@
   <div>
     <md-tabs class="no-navigation">
       <md-tab :md-active="tab === 'grid'">
-        <v-grid :list="list" :filter="filter" :title="title" @edit="onGridEdit" @add="onGridAdd" />
+        <v-grid ref="grid" :list="list" :filter="filter" :title="title" @edit="onGridEdit" @add="onGridAdd" />
       </md-tab>
       <md-tab :md-active="tab === 'form'">
-        <v-form :title="title" :model="model" @save="onFormSave" @back="onFormBack" @remove="onFormRemove" />
+        <v-form ref="form" :title="title" :model="model" @save="onFormSave" @back="onFormBack" @remove="onFormRemove" />
       </md-tab>
     </md-tabs>
-    <v-dialog ref="dialog" :title="dialog.title" @close="dialog.onClose" />
+    <v-dialog ref="dialog" />
   </div>
 </template>
 
@@ -25,18 +25,8 @@ export default {
     VDialog
   },
   store,
-  // props: {
-  //   form: {
-  //     type: Object
-  //   }
-  // },
   data() {
     return {
-      dialog: {
-        onClose() {
-          // It is not an empty method
-        }
-      },
       modelHash: null,
       model: {},
       filter: {},
@@ -50,34 +40,46 @@ export default {
   },
   methods: {
     onFormSave() {
-      const ui = this.$refs.dialog
-      const { dialog } = this
+      const { dialog, form } = this.$refs
 
       // Etapa 1: Confirmação das alterações
-      dialog.title = "Salvar as alterações?"
-      ui.confirm()
+      dialog.confirm("Salvar?").then(state => {
+        // Etapa 2: Bloqueia a tela e efetua ação
+        dialog.dialog("Salvando...")
 
-      dialog.onClose = state => {
-        if (state === "ok") {
-          // Etapa 2: Bloqueia a tela e Salva os dados
-          dialog.title = "Salvando..."
-          ui.dialog()
+        form
+          .save()
+          .then(response => {
+            // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
+            dialog.alert("Salvo com sucesso!")
+            this.tab = "grid"
+          })
+          .catch(error => {
+            dialog.alert("Erro ao salvar!")
+            console.error(error)
+          })
+      })
+    },
+    onFormRemove() {
+      const { dialog, form } = this.$refs
 
-          this.service
-            .post("", this.model, { auth: this.auth })
-            .then(response => {
-              // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
-              ui.alert()
-              dialog.title = "Salvo com sucesso!"
-              this.tab = "grid"
-            })
-            .catch(error => {
-              ui.alert()
-              dialog.title = "Erro ao salvar!"
-              console.error(error)
-            })
-        }
-      }
+      // Etapa 1: Confirmação a ação
+      dialog.confirm("Remover?").then(state => {
+        // Etapa 2: Bloqueia a tela e efetua a ação
+        dialog.dialog("Removendo...")
+
+        form
+          .delete()
+          .then(response => {
+            // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
+            dialog.alert("Removido com sucesso!")
+            this.tab = "grid"
+          })
+          .catch(error => {
+            dialog.alert("Erro ao remover!")
+            console.error(error)
+          })
+      })
     },
     onFormBack() {
       if (this.modelHash === hash(this.model)) {
@@ -96,31 +98,6 @@ export default {
         if (state === "ok") {
           this.model = {}
           this.tab = "grid"
-        }
-      }
-    },
-    onFormRemove() {
-      const ui = this.$refs.dialog
-      const { dialog } = this
-
-      // Etapa 1: Confirmação das alterações
-      dialog.title = "Remover o registro?"
-      ui.confirm()
-
-      dialog.onClose = state => {
-        if (state === "ok") {
-          // Etapa 2: Bloqueia a tela e Salva os dados
-          dialog.title = "Removendo..."
-          ui.dialog()
-
-          // Delay simulando troca de dados com o servidor
-          setTimeout(() => {
-            // Etapa 3: Mostra a mensagem de sucesso e volta para o grid
-            ui.alert()
-            dialog.title = "Removido com sucesso!"
-            this.model = {}
-            this.tab = "grid"
-          }, 2000)
         }
       }
     },

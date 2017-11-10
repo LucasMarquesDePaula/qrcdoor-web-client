@@ -1,9 +1,3 @@
-import conf, { baseURL } from "./conf"
-import assignIn from "lodash/assignIn"
-import axios from "axios"
+import service from "@service"
 
-export default axios.create(
-  assignIn({}, conf, {
-    baseURL: `${baseURL}/pessoas`
-  })
-)
+export default service("pessoa")

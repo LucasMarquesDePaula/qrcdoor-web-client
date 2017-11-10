@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import service from "@service"
+import service from "@service/login"
 import { mapActions } from "vuex"
 import { minLength, required } from "vuelidate/lib/validators"
 
@@ -61,10 +61,7 @@ export default {
       }
 
       service
-        .request({
-          url: "/login",
-          method: "post",
-          auth,
+        .post({
           data: auth
         })
         .then(response => {

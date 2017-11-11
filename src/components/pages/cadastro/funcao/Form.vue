@@ -28,11 +28,10 @@
 </template>
 
 <script>
-import Permissoes from "./Permissoes"
-import Pessoas from "./Pessoas"
-import VForm from "../Form"
-import model from "./Model"
-
+// import Permissoes from "./Permissoes"
+// import Pessoas from "./Pessoas"
+// import VForm from "../Form"
+// import model from "./Model"
 
 export default {
   components: {

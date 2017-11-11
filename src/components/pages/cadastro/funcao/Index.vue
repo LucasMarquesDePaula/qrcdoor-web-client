@@ -1,7 +1,7 @@
 <script>
-import VForm from "./Form"
-import VGrid from "./Grid"
-import VIndex from "../Index"
+// import VForm from "./Form"
+// import VGrid from "./Grid"
+// import VIndex from "../Index"
 
 export default {
   extends: VIndex,

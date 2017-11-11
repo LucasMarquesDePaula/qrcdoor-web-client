@@ -1,7 +1,7 @@
 <script>
-import model from "./Model"
 import AbstractTable from "@/components/abstract/crud/table"
 import CrudTableBody from "./Body"
+import CrudTableFilter from "./Filter"
 import CrudTableHeader from "./Header"
 
 export default {

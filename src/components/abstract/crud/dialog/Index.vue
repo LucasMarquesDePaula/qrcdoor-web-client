@@ -7,7 +7,7 @@
       </md-dialog-content>
     </md-dialog>
 
-    <md-dialog-confirm :md-ok-text="okText" :md-cancel-text="cancelText" @open="onOpen" @close="onClose"></md-dialog-confirm>
+    <md-dialog-confirm md-content=" " :md-ok-text="okText" :md-cancel-text="cancelText" @open="onOpen" @close="onClose"></md-dialog-confirm>
 
     <md-dialog ref="confirm">
       <md-dialog-title>{{title}}</md-dialog-title>
@@ -15,8 +15,8 @@
         <slot></slot>
       </md-dialog-content>
       <md-dialog-actions>
-        <md-button class="md-primary" @click="close(); onClose()">{{cancelText}}</md-button>
-        <md-button class="md-primary" @click="close(); onClose('ok')">{{okText}}</md-button>
+        <md-button class="md-primary" @click="$refs.confirm.close(); onClose()">{{cancelText}}</md-button>
+        <md-button class="md-primary" @click="$refs.confirm.close(); onClose('ok')">{{okText}}</md-button>
       </md-dialog-actions>
     </md-dialog>
   </div>

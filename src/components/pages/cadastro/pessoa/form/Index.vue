@@ -45,7 +45,7 @@
       </md-tabs>
     </md-card-content>
     <md-card-actions>
-      <form-actions @save="$emit('save', $data)" @back="$emit('back', $data)" @remove="$emit('remove', $data)" />
+      <crud-form-actions @save="$emit('save', $data)" @back="$emit('back', $data)" @remove="$emit('remove', $data)" />
     </md-card-actions>
   </md-card>
 </template>

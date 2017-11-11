@@ -1,22 +1,22 @@
 <script>
-import VForm from "./Form"
-import VGrid from "./Grid"
-import VIndex from "../Index"
+import AbstractCrud from "@/components/abstract/crud"
+import CrudForm from "./form"
+import CrudTable from "./table"
 
 import service from "@service/pessoa"
 
 export default {
-  extends: VIndex,
+  extends: AbstractCrud,
   components: {
-    VForm,
-    VGrid
+    CrudForm,
+    CrudTable
   },
   computed: {
-    service: {
-      get() {
-        return service
-      }
-    },
+    // service: {
+    //   get() {
+    //     return service
+    //   }
+    // },
     title: {
       get() {
         return "Cadastro Pessoa"

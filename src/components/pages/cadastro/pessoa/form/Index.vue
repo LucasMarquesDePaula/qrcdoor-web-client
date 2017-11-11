@@ -1,5 +1,4 @@
 <template>
-  <!-- <v-form @save="$emit('save', $data)" @back="$emit('back', $data)" @remove="$emit('remove', $data)"> -->
   <md-card>
     <md-card-content>
       <md-layout md-row>
@@ -29,19 +28,19 @@
 
       <md-tabs>
         <md-tab md-label="Informações Básicas">
-          <v-informacoes-basicas :model="model" />
+          <tab-informacoes-basicas :model="model" />
         </md-tab>
 
         <md-tab md-label="Funções">
-          <v-funcoes :model="model" />
+          <tab-funcoes :model="model" />
         </md-tab>
 
         <md-tab md-label="Chaves">
-          <v-chaves :model="model" />
+          <tab-chaves :model="model" />
         </md-tab>
 
         <md-tab md-label="Permissões">
-          <v-permissoes :model="model" />
+          <tab-permissoes :model="model" />
         </md-tab>
       </md-tabs>
     </md-card-content>
@@ -52,36 +51,25 @@
 </template>
 
 <script>
-import VChaves from "./Chaves"
-import VForm from "../Form"
-import VFuncoes from "./Funcoes"
-import VInformacoesBasicas from "./InformacoesBasicas"
-import VPermissoes from "./Permissoes"
+import AbstractForm from "@/components/abstract/crud/form"
+import TabChaves from "./tab/Chaves"
+import TabFuncoes from "./tab/Funcoes"
+import TabInformacoesBasicas from "./tab/InformacoesBasicas"
+import TabPermissoes from "./tab/Permissoes"
 
 import avatar from "@images/avatar.png"
 
-import service from "@service/pessoa"
-
 export default {
-  extends: VForm,
+  extends: AbstractForm,
   components: {
-    VChaves,
-    VFuncoes,
-    VInformacoesBasicas,
-    VPermissoes
+    TabChaves,
+    TabFuncoes,
+    TabInformacoesBasicas,
+    TabPermissoes
   },
-  props: ["model"],
   data() {
     return {
       avatar
-    }
-  },
-  methods: {
-    doSave(resolve, reject) {
-      service
-        .post(this.model)
-        .then(resolve)
-        .catch(reject)
     }
   }
 }

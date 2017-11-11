@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import qs from "qs"
 import service from "@service/login"
 import { mapActions } from "vuex"
 import { minLength, required } from "vuelidate/lib/validators"
@@ -61,9 +62,7 @@ export default {
       }
 
       service
-        .post({
-          data: auth
-        })
+        .post(qs.stringify(auth))
         .then(response => {
           self.login(auth)
           // self.$store.dispatch("login", auth)

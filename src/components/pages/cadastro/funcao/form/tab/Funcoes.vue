@@ -4,29 +4,24 @@
       <md-layout>
         <md-input-container>
           <label>Estrutura</label>
-          <md-select v-model="form.estrutura">
-            <md-option v-for="(option, index) in [ { id: 1, name: 'a' }, { id: 2, name: 'b' }, { id: 3, name: 'c' } ]"
-              :key="index"
-              :value="option">
-              { { option.name } }
-            </md-option>
-          </md-select>
+          <md-autocomplete v-model="form.estrutura" :list="estrutura()" print-attribute="descricao">
+          </md-autocomplete>
         </md-input-container>
       </md-layout>
       <md-layout>
         <md-input-container>
           <label>Inicio</label>
-          <md-input v-model="form.dataInicio"></md-input>
+          <md-input type="date" v-model="form.dataInicio"></md-input>
         </md-input-container>
       </md-layout>
       <md-layout>
         <md-input-container>
           <label>Fim</label>
-          <md-input v-model="form.dataFim"></md-input>
+          <md-input type="date" v-model="form.dataFim"></md-input>
         </md-input-container>
       </md-layout>
       <md-layout md-flex="10">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="add()" class="md-icon-button md-raised md-primary">
           <md-icon>add</md-icon>
         </md-button>
       </md-layout>
@@ -60,6 +55,27 @@ export default {
   data() {
     return {
       form: {}
+    }
+  },
+  methods: {
+    add() {
+      // TODO adicionar validação
+      if (!this.model.funcoes) {
+        this.model.funcoes = []
+      }
+      if (this.form.estrutura) {
+        this.model.funcoes.push(this.form)
+        this.form = {}
+      }
+    },
+    estrutura() {
+      // console.log(args.q)
+      // TODO ajax
+      return [
+        { idEstrutura: 1, descricao: "a" },
+        { idEstrutura: 2, descricao: "b" },
+        { idEstrutura: 3, descricao: "c" }
+      ]
     }
   }
 }

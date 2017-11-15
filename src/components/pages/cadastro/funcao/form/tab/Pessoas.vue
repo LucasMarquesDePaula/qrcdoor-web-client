@@ -4,8 +4,7 @@
       <md-layout>
         <md-input-container>
           <label>Pessoa</label>
-          <md-autocomplete v-model="form.pessoa" :list="estrutura()" print-attribute="nome">
-          </md-autocomplete>
+          <md-autocomplete v-model="selection" print-attribute="nome" :fetch="fetch" @selected="selected" :debounce="500" />
         </md-input-container>
       </md-layout>
       <md-layout>
@@ -36,11 +35,11 @@
       </md-table-header>
 
       <md-table-body>
-        <md-table-row v-for="(funcao, index) in model.funcoes" :key="index">
-          <md-table-cell>{{funcao.descricao}}</md-table-cell>
-          <md-table-cell>{{funcao.dataInicio}}</md-table-cell>
-          <md-table-cell>{{funcao.dataFim}}</md-table-cell>
-          <md-button class="md-icon-button">
+        <md-table-row v-for="(funcaoPessoa, index) in model.funcaoPessoas" :key="index">
+          <md-table-cell>{{funcaoPessoa.pessoa.nome}}</md-table-cell>
+          <md-table-cell>{{funcaoPessoa.dataInicio}}</md-table-cell>
+          <md-table-cell>{{funcaoPessoa.dataFim}}</md-table-cell>
+          <md-button class="md-icon-button" @click="remove(index)">
             <md-icon>edit</md-icon>
           </md-button>
         </md-table-row>
@@ -51,33 +50,72 @@
 
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
+import service from "@service/pessoa"
 export default {
   extends: AbstractTab,
   data() {
     return {
-      form: {}
+      form: {},
+      selection: ""
     }
   },
   methods: {
     add() {
-      // TODO adicionar validação
-      if (!this.model.pessoas) {
-        this.model.pessoas = []
+      this.selection = ""
+
+      if (!this.model.funcaoPessoas) {
+        this.model.funcaoPessoas = []
       }
-      if (this.form.estrutura) {
-        this.model.pessoas.push(this.form)
+
+      if (this.form.pessoa) {
+        this.model.funcaoPessoas.push(this.form)
         this.form = {}
       }
     },
-    estrutura() {
-      // console.log(args.q)
-      // TODO ajax
-      return [
-        { idEstrutura: 1, nome: "a" },
-        { idEstrutura: 2, nome: "b" },
-        { idEstrutura: 3, nome: "c" }
-      ]
+    remove(index) {
+      this.model.funcaoPessoas
+    },
+    fetch({ q }) {
+      return new Promise((resolve, reject) => {
+        service
+          .get({
+            params: {
+              nome: q,
+              situacao: "A"
+            }
+          })
+          .then(response => {
+            resolve(response.data.content)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    selected(item) {
+      const { id, nome } = item
+      this.form.pessoa = { id, nome }
     }
   }
 }
+
+// extends: AbstractTab,
+// data() {
+//   return {
+//     form: {
+//       pessoa: ""
+//     }
+//   }
+// },
+// methods: {
+
+//   fetch() {
+//     return {
+//       pessoas() {
+//         console.log(arguments)
+//       }
+//     }
+//   }
+// }
+// }
 </script>

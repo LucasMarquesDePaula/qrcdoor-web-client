@@ -49,7 +49,7 @@ export default {
     },
     doDelete(resolve, reject) {
       this.service
-        .delete(this.model)
+        .delete(this.model.id)
         .then(resolve)
         .catch(reject)
     }

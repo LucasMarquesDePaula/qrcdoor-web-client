@@ -7,17 +7,8 @@
           <img :src="model.foto ? `data:image/${model.fotoExtensao};base64,${model.foto}` : avatar">
         </md-avatar>
       </md-table-cell>
-      <md-table-cell>{{model.nome}}</md-table-cell>
+      <md-table-cell>{{model.descricao}}</md-table-cell>
       <md-table-cell>{{model.situacao | situacao}}</md-table-cell>
-      <!--
-                  <md-table-cell>{{model.telefoneFixo}}</md-table-cell>
-                  <md-table-cell>{{model.telefoneCelular}}</md-table-cell>
-                  -->
-      <md-table-cell>{{model.documento}}</md-table-cell>
-      <!--
-                  <md-table-cell>{{model.fisicaJuridica | natureza}}</md-table-cell>
-                  <md-table-cell>{{model.login}}</md-table-cell>
-                  -->
       <md-table-cell>
         <md-button class="md-icon-button" @click="$emit('edit', model)">
           <md-icon>edit</md-icon>
@@ -33,17 +24,16 @@ import avatar from "@images/avatar.png"
 
 export default {
   extends: AbstractTableBody,
-  filters: {
-    natureza(value) {
-      return value === "F" ? "Física" : value === "J" ? "Júrídica" : ""
-    },
-    situacao(value) {
-      return value === "A" ? "Ativa" : value === "I" ? "Inativa" : ""
+  computed: {
+    avatar: {
+      get() {
+        return avatar
+      }
     }
   },
-  computed: {
-    avatar() {
-      return avatar
+  filters: {
+    situacao(value) {
+      return value === "A" ? "Ativo" : value === "I" ? "Inativo" : ""
     }
   }
 }

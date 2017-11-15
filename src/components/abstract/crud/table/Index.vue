@@ -64,29 +64,33 @@ export default {
   },
   methods: {
     reload() {
-      // debugger
-      // console.log(this.$refs)
-      // this.$refs.dialog.dialog()
+      const { dialog } = this.$refs
+      this.list = []
+      const sort = `${this.sort.name || ""},${this.sort.type || ""}`
+
+      dialog.dialog()
+
       this.service
         .get({
           params: {
-            sort: `${this.sort.name || ""},${this.sort.type || ""}`.replace(
-              /,$/,
-              ""
-            ),
+            sort: sort.replace(/,$/, ""),
             size: this.pagination.size,
             page: this.pagination.page - 1,
             ...this.filter
           }
         })
-        .then((response) => {
-          console.log(response)
+        .then(response => {
           const { data } = response
           this.list = data.content
 
           this.pagination.size = data.size
           // this.pagination.page = data.page + 1
           this.pagination.total = data.totalPages
+
+          dialog.close()
+        })
+        .catch(error => {
+          dialog.alert(error)
         })
     },
 
@@ -117,9 +121,6 @@ export default {
     onSearch() {
       this.reload()
     }
-  },
-  created() {
-    this.reload()
   }
 }
 </script>

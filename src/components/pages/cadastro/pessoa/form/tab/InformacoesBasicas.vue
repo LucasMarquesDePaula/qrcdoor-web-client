@@ -4,7 +4,7 @@
       <md-layout md-flex="25">
         <md-input-container :class="{ 'md-input-invalid': $v.model.documento.$error }">
           <label>Documento (CPF / CNPJ)</label>
-          <md-input v-model="model.documento" v-mask="['###.###.##-##', '##.###.###/####-##']" @blur="$v.model.documento.$touch" required></md-input>
+          <md-input v-model="model.documento" v-mask="['###.###.###-##', '##.###.###/####-##']" @blur="$v.model.documento.$touch" required></md-input>
           <span class="md-error" v-show="$v.model.documento.$error">Valor inválido</span>
         </md-input-container>
       </md-layout>

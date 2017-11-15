@@ -53,22 +53,52 @@ export default {
   methods: {
     alert(title) {
       const self = this
-      self.$refs.confirm.close()
-      self.$refs.dialog.close()
+
+      try {
+        self.$refs.dialog.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
+
+      try {
+        self.$refs.confirm.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
 
       self.title = title
-      self.$refs.alert.open()
+      try {
+        self.$refs.alert.open()
+      } catch (ignored) {
+        // Silence is golden
+      }
     },
     confirm(title) {
       const self = this
-      self.$refs.alert.close()
-      self.$refs.dialog.close()
 
       self.title = title
-      self.$refs.confirm.open()
+
+      try {
+        self.$refs.dialog.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
+
+      try {
+        self.$refs.alert.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
+
+      self.title = title
+      try {
+        self.$refs.confirm.open()
+      } catch (ignored) {
+        // Silence is golden
+      }
 
       return new Promise((resolve, reject) => {
-        self.onClose = (state) => {
+        self.onClose = state => {
           if (state === "ok") {
             resolve()
             return
@@ -79,18 +109,47 @@ export default {
     },
     dialog(title) {
       const self = this
-      self.$refs.alert.close()
-      self.$refs.confirm.close()
+      try {
+        self.$refs.alert.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
+
+      try {
+        self.$refs.confirm.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
 
       self.title = title
-      self.$refs.dialog.open()
+      try {
+        self.$refs.dialog.open()
+      } catch (ignored) {
+        // Silence is golden
+      }
+    },
+    close() {
+      const self = this
+      self.title = ""
+
+      try {
+        self.$refs.alert.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
+
+      try {
+        self.$refs.confirm.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
+
+      try {
+        self.$refs.dialog.close()
+      } catch (ignored) {
+        // Silence is golden
+      }
     }
-    // onOpen(state) {
-    //   this.$emit("open", state)
-    // },
-    // onClose(state) {
-    //   this.$emit("close", state)
-    // }
   }
 }
 </script>

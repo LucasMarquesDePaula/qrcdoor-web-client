@@ -26,6 +26,7 @@ module.exports = {
       "@": resolve("src"),
       "@fonts": resolve("/static/fonts/"),
       "@images": resolve("/static/images/"),
+      "@libs": resolve("/static/libs/"),
       "@pages": resolve("src/components/pages"),
       "@router": resolve("src/router"),
       "@service": resolve("src/service"),

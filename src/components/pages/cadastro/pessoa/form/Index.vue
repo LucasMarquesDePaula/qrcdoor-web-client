@@ -145,11 +145,11 @@ export default {
         reader.readAsDataURL(file)
         reader.onload = () => {
           const { result } = reader
-          const foto = ""
+          let foto = ""
           let fotoExtensao = ""
           for (let i = 0, len = result.length; i < len; i++) {
             if (result[i] === ",") {
-              // foto = result.substring(i + 1)
+              foto = result.substring(i + 1)
               fotoExtensao = result.substring(0, i)
               fotoExtensao = fotoExtensao.replace("data:image/", "")
               fotoExtensao = fotoExtensao.replace(";base64", "")

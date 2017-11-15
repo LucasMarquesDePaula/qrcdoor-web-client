@@ -14,8 +14,8 @@ export default (url) => {
     get(config) {
       return service.get(url, defaults(config))
     },
-    delete(config) {
-      return service.delete(url, defaults(config))
+    delete(id, config) {
+      return service.delete(`${url}/${id}`, defaults(config))
     },
     head(config) {
       return service.head(url, defaults(config))

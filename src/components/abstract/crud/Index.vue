@@ -31,8 +31,7 @@ export default {
       model: {},
       filter: {},
       list: [],
-      tab: "table"
-      // tab: "form"
+      tab: ""
     }
   },
   computed: {
@@ -112,6 +111,17 @@ export default {
       this.model = model
       this.tab = "form"
     }
+  },
+  watch: {
+    tab(value) {
+      const { table } = this.$refs
+      if (value === "table") {
+        table.reload()
+      }
+    }
+  },
+  mounted() {
+    this.tab = "table"
   }
 }
 </script>

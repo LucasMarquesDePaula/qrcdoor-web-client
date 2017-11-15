@@ -79,7 +79,7 @@ export default {
             ...this.filter
           }
         })
-        .then(response => {
+        .then((response) => {
           console.log(response)
           const { data } = response
           this.list = data.content

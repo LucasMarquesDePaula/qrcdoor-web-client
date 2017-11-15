@@ -54,11 +54,13 @@
 </template>
 
 <script>
+import AbstractTab from "@/components/abstract/crud/form-tab"
+
 import isEmpty from "lodash/isEmpty"
 import service from "@service/chaves"
 
 export default {
-  props: ["model"],
+  extends: AbstractTab,
   data() {
     return {
       form: {}
@@ -79,7 +81,6 @@ export default {
   watch: {
     model(model) {
       if (!isEmpty(model)) {
-
       }
       console.log("model")
     }

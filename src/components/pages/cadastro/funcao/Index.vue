@@ -3,7 +3,7 @@ import AbstractCrud from "@/components/abstract/crud"
 import CrudForm from "./form"
 import CrudTable from "./table"
 
-import service from "@service/pessoa"
+import service from "@service/funcao"
 
 export default {
   extends: AbstractCrud,
@@ -19,7 +19,7 @@ export default {
     },
     title: {
       get() {
-        return "Cadastro Pessoa"
+        return "Cadastro Função"
       }
     }
   }

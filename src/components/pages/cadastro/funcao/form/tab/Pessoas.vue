@@ -3,7 +3,7 @@
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container>
-          <label>Estrutura</label>
+          <label>Pessoa</label>
           <md-autocomplete v-model="form.estrutura" :list="estrutura()" print-attribute="descricao">
           </md-autocomplete>
         </md-input-container>
@@ -50,8 +50,9 @@
 </template>
 
 <script>
+import AbstractTab from "@/components/abstract/crud/form-tab"
 export default {
-  props: ["model"],
+  extends: AbstractTab,
   data() {
     return {
       form: {}
@@ -60,11 +61,11 @@ export default {
   methods: {
     add() {
       // TODO adicionar validação
-      if (!this.model.funcoes) {
-        this.model.funcoes = []
+      if (!this.model.pessoas) {
+        this.model.pessoas = []
       }
       if (this.form.estrutura) {
-        this.model.funcoes.push(this.form)
+        this.model.pessoas.push(this.form)
         this.form = {}
       }
     },

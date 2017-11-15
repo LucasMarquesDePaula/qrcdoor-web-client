@@ -68,7 +68,7 @@ export default {
       self.$refs.confirm.open()
 
       return new Promise((resolve, reject) => {
-        self.onClose = state => {
+        self.onClose = (state) => {
           if (state === "ok") {
             resolve()
             return

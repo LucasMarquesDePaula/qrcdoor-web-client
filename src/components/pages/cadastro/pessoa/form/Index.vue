@@ -138,13 +138,13 @@ export default {
       $input.hide(0).appendTo(this.$el)
 
       // Add listener
-      $input.change(event => {
+      $input.change((event) => {
         const file = event.currentTarget.files[0]
         const reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onload = () => {
           const { result } = reader
-          let foto = ""
+          const foto = ""
           let fotoExtensao = ""
           for (let i = 0, len = result.length; i < len; i++) {
             if (result[i] === ",") {

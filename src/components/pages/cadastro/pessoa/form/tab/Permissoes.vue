@@ -64,8 +64,9 @@
 </template>
 
 <script>
+import AbstractTab from "@/components/abstract/crud/form-tab"
 export default {
-  props: ["model"],
+  extends: AbstractTab,
   data() {
     return {
       form: {}

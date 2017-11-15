@@ -30,11 +30,6 @@
 <script>
 import AbstractTableHeader from "@/components/abstract/crud/table-header"
 export default {
-  extends: AbstractTableHeader,
-  filters: {
-    natureza(value) {
-      return value === "F" ? "Física" : value === "J" ? "Júrídica" : ""
-    }
-  }
+  extends: AbstractTableHeader
 }
 </script>

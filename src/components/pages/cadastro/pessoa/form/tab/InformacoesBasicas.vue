@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-layout :md-gutter="true">
-      <md-layout md-flex="50">
+      <md-layout>
         <md-input-container :class="{ 'md-input-invalid': messages.documento }">
           <label>Documento (CPF / CNPJ)</label>
           <md-input v-model="model.documento" required></md-input>
@@ -9,19 +9,27 @@
         </md-input-container>
       </md-layout>
 
-      <md-layout md-flex="25">
-        <md-input-container :class="{ 'md-input-invalid': messages.fisicaJuridica }">
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': $v.model.fisicaJuridica.$error }">
           <label>Natureza</label>
-          <md-select v-model="model.fisicaJuridica" required>
+          <md-select v-model="model.fisicaJuridica" required @closed="$v.model.fisicaJuridica.$touch">
             <md-option value="F">Física</md-option>
             <md-option value="J">Jurídica</md-option>
           </md-select>
-          <span class="md-error">{{messages.fisicaJuridica}}</span>
+          <span class="md-error" v-show="$v.model.fisicaJuridica.required">Valor Obrigatório</span>
         </md-input-container>
       </md-layout>
     </md-layout>
 
     <md-layout :md-gutter="true">
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': messages.email }">
+          <label>Email</label>
+          <md-input v-model="model.email" required></md-input>
+          <span class="md-error">{{messages.email}}</span>
+        </md-input-container>
+      </md-layout>
+
       <md-layout>
         <md-chips v-model="telefoneFixo" v-mask="['####-####', '(##) ####-####']" md-input-placeholder="Telefone Fixo..." :class="{ 'md-input-invalid': messages.telefoneFixo }">
           <span class="md-error">{{messages.telefoneFixo}}</span>
@@ -60,13 +68,12 @@
 
 <script>
 export default {
-  props: ["model"],
+  props: { model: {}, $v: {} },
   data() {
     return {
       telefoneCelular: [],
       telefoneFixo: [],
-      messages: {
-      }
+      messages: {}
     }
   },
   watch: {

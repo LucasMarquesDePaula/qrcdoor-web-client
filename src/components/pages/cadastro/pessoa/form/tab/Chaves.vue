@@ -40,7 +40,7 @@
 
       <md-table-body>
         <md-table-row v-for="(chave, index) in model.chaves" :key="index">
-          <md-table-cell>{{chave.idChave}}</md-table-cell>
+          <md-table-cell>{{chave.id}}</md-table-cell>
           <md-table-cell>{{chave.descricao}}</md-table-cell>
           <md-table-cell>{{chave.tipo}}</md-table-cell>
           <md-table-cell>{{chave.assinatura}}</md-table-cell>
@@ -54,6 +54,9 @@
 </template>
 
 <script>
+import isEmpty from "lodash/isEmpty"
+import service from "@service/chaves"
+
 export default {
   props: ["model"],
   data() {
@@ -71,6 +74,14 @@ export default {
         this.model.chaves.push(this.form)
         this.form = {}
       }
+    }
+  },
+  watch: {
+    model(model) {
+      if (!isEmpty(model)) {
+
+      }
+      console.log("model")
     }
   }
 }

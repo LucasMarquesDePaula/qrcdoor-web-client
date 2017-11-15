@@ -12,11 +12,11 @@ export default {
     CrudTable
   },
   computed: {
-    // service: {
-    //   get() {
-    //     return service
-    //   }
-    // },
+    service: {
+      get() {
+        return service
+      }
+    },
     title: {
       get() {
         return "Cadastro Pessoa"

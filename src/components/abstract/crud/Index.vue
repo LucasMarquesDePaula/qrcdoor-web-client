@@ -2,13 +2,13 @@
   <div>
     <md-tabs class="no-navigation">
       <md-tab :md-active="tab === 'table'">
-        <crud-table ref="table" :list="list" :filter="filter" :title="title" @edit="ontableEdit" @add="ontableAdd" />
+        <crud-table ref="table" :service="service" @edit="onTableEdit" @add="onTableAdd" />
       </md-tab>
       <md-tab :md-active="tab === 'form'">
-        <crud-form ref="form" :model="model" @save="onFormSave" @back="onFormBack" @remove="onFormRemove" />
+        <crud-form ref="form" :service="service" :model="model" @save="onFormSave" @back="onFormBack" @remove="onFormRemove" />
       </md-tab>
     </md-tabs>
-    <crud-dialog ref="dialog" />
+    <crud-dialog ref="dialog"></crud-dialog>
   </div>
 </template>
 
@@ -31,8 +31,8 @@ export default {
       model: {},
       filter: {},
       list: [],
-      tab: "form"
-      // tab: "table"
+      tab: "table"
+      // tab: "form"
     }
   },
   computed: {
@@ -96,13 +96,13 @@ export default {
         this.tab = "table"
       })
     },
-    ontableAdd() {
+    onTableAdd() {
       const model = {}
       this.modelHash = hash(model)
       this.model = model
       this.tab = "form"
     },
-    ontableEdit(model) {
+    onTableEdit(model) {
       this.modelHash = hash(model)
       this.model = model
       this.tab = "form"

@@ -17,6 +17,7 @@
     "amcharts": "^3.14.5",
     "axios": "^0.17.0",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "object-hash": "^1.2.0",
     "orb-js": "^0.1.5",
@@ -106,5 +107,9 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

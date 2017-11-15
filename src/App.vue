@@ -81,7 +81,10 @@ export default {
 
 <style lang="scss" scopped>
 .router-view {
-  padding: 12px;
+  position: absolute;
+  height: calc(100% - 65px);
+  width: 100%;
+  background-color: #e0e0e0;
 }
 img.logo {
   height: 46px;

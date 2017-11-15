@@ -9,12 +9,20 @@ export default {
       default() {
         return {}
       }
+    },
+    service: {
+      required: true
     }
   },
   methods: {
     save() {
       return new Promise((resolve, reject) => {
         try {
+          this.$v.model.$touch()
+          if (this.$v.model.$error) {
+            throw new Error("Verifique os dados inseridos.")
+          }
+
           this.doSave(resolve, reject)
         } catch (error) {
           reject(error)
@@ -32,7 +40,7 @@ export default {
     },
     doSave(resolve, reject) {
       this.service
-        .post(this.model)
+        [!this.model.id ? "post" : "put"](this.model)
         .then(resolve)
         .catch(reject)
     },

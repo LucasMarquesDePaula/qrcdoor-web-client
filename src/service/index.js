@@ -2,9 +2,7 @@ import axios from "axios"
 import config from "./config"
 import store from "@store"
 
-const defaults = (config) => {
-  return { ...config, ...{ auth: store.getters.auth } }
-}
+const defaults = (config) => ({ ...config, ...{ auth: store.getters.auth } })
 
 export default (url) => {
   const service = axios.create(config)

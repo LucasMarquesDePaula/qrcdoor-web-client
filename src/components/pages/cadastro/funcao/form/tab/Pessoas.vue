@@ -4,7 +4,7 @@
       <md-layout>
         <md-input-container>
           <label>Pessoa</label>
-          <md-autocomplete v-model="form.estrutura" :list="estrutura()" print-attribute="descricao">
+          <md-autocomplete v-model="form.pessoa" :list="estrutura()" print-attribute="nome">
           </md-autocomplete>
         </md-input-container>
       </md-layout>
@@ -73,9 +73,9 @@ export default {
       // console.log(args.q)
       // TODO ajax
       return [
-        { idEstrutura: 1, descricao: "a" },
-        { idEstrutura: 2, descricao: "b" },
-        { idEstrutura: 3, descricao: "c" }
+        { idEstrutura: 1, nome: "a" },
+        { idEstrutura: 2, nome: "b" },
+        { idEstrutura: 3, nome: "c" }
       ]
     }
   }

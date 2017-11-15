@@ -52,15 +52,15 @@
         </md-tab>
 
         <md-tab md-label="Funções">
-          <tab-funcoes :model="model" />
+          <tab-funcoes :model="model" :$v="$v" />
         </md-tab>
 
         <md-tab md-label="Chaves">
-          <tab-chaves :model="model" />
+          <tab-chaves :model="model" :$v="$v" />
         </md-tab>
 
         <md-tab md-label="Permissões">
-          <tab-permissoes :model="model" />
+          <tab-permissoes :model="model" :$v="$v" />
         </md-tab>
       </md-tabs>
     </md-card-content>
@@ -116,7 +116,8 @@ export default {
         email
       },
       login: {
-        required
+        required,
+        minLength: minLength(4)
       },
       senha: {},
       telefoneCelular: {},
@@ -138,7 +139,7 @@ export default {
       $input.hide(0).appendTo(this.$el)
 
       // Add listener
-      $input.change((event) => {
+      $input.change(event => {
         const file = event.currentTarget.files[0]
         const reader = new FileReader()
         reader.readAsDataURL(file)

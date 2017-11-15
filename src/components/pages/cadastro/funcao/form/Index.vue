@@ -2,14 +2,22 @@
   <md-card>
     <md-card-content>
       <md-layout :md-gutter="true">
-        <md-layout md-flex="50">
+        <md-layout md-flex="20">
+          <md-input-container>
+            <label>Cód.</label>
+            <md-input v-model.trim="model.id" :readonly="true"></md-input>
+          </md-input-container>
+        </md-layout>
+        <md-layout md-flex="80">
           <md-input-container :class="{ 'md-input-invalid': $v.model.descricao.$error }">
             <label>Descrição</label>
             <md-input v-model.trim="model.descricao" @blur="$v.model.descricao.$touch" :maxlength="255"></md-input>
             <span class="md-error" v-show="$v.model.descricao.$error">Valor inválido</span>
           </md-input-container>
         </md-layout>
+      </md-layout>
 
+      <md-layout>
         <md-layout md-flex="25">
           <md-input-container :class="{ 'md-input-invalid': $v.model.situacao.$error }">
             <label>Situação</label>

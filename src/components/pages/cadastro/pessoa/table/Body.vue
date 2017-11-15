@@ -8,12 +8,16 @@
         </md-avatar>
       </md-table-cell>
       <md-table-cell>{{model.nome}}</md-table-cell>
-      <md-table-cell>{{model.situacao}}</md-table-cell>
-      <md-table-cell>{{model.telefoneFixo}}</md-table-cell>
-      <md-table-cell>{{model.telefoneCelular}}</md-table-cell>
+      <md-table-cell>{{model.situacao | situacao}}</md-table-cell>
+      <!--
+              <md-table-cell>{{model.telefoneFixo}}</md-table-cell>
+              <md-table-cell>{{model.telefoneCelular}}</md-table-cell>
+              -->
       <md-table-cell>{{model.documento}}</md-table-cell>
-      <md-table-cell>{{model.fisicaJuridica | natureza}}</md-table-cell>
-      <md-table-cell>{{model.login}}</md-table-cell>
+      <!--
+              <md-table-cell>{{model.fisicaJuridica | natureza}}</md-table-cell>
+              <md-table-cell>{{model.login}}</md-table-cell>
+              -->
       <md-table-cell>
         <md-button class="md-icon-button" @click="$emit('edit', model)">
           <md-icon>edit</md-icon>
@@ -32,6 +36,9 @@ export default {
   filters: {
     natureza(value) {
       return value === "F" ? "Física" : value === "J" ? "Júrídica" : ""
+    },
+    natureza(value) {
+      return value === "A" ? "Ativa" : value === "I" ? "Inativa" : ""
     }
   },
   computed: {

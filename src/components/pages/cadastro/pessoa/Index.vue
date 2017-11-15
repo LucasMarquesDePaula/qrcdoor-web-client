@@ -26,3 +26,9 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+section {
+  max-width: 1000px;
+}
+</style>
+

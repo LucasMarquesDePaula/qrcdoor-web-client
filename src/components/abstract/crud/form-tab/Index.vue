@@ -6,15 +6,10 @@ export default {
         return {}
       }
     },
-    v: {
+    $v: {
       default() {
         return {}
       }
-    }
-  },
-  computed: {
-    $v() {
-      return this.v
     }
   }
 }

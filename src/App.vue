@@ -28,9 +28,11 @@
 
     <!-- Router -->
     <div class="router-view">
-      <transition :name="transition">
-        <router-view></router-view>
-      </transition>
+      <md-layout md-align="center">
+        <transition :name="transition">
+          <router-view></router-view>
+        </transition>
+      </md-layout>
     </div>
     <!-- /Router -->
   </div>

@@ -15,10 +15,13 @@ export default {
     }
   },
   methods: {
+    validate() {
+      this.$v.model.$touch()
+      return !this.$v.model.$error
+    },
     save() {
       return new Promise((resolve, reject) => {
         try {
-          this.$v.model.$touch()
           if (this.$v.model.$error) {
             throw new Error("Verifique os dados inseridos.")
           }

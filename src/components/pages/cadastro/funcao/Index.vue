@@ -12,17 +12,18 @@ export default {
     CrudTable
   },
   computed: {
-    service: {
-      get() {
-        return service
-      }
+    service() {
+      return service
     },
-    title: {
-      get() {
-        return "Cadastro Função"
-      }
+    title() {
+      return "Cadastro Função"
     }
   }
 }
 </script>
 
+<style lang="scss" scoped>
+section {
+  max-width: 750px;
+}
+</style>

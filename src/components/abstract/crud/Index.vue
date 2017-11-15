@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <md-toolbar>
-      <md-title>{{title}}</md-title>
-    </md-toolbar>
+  <section>
     <md-tabs class="no-navigation">
       <md-tab :md-active="tab === 'table'">
         <crud-table ref="table" :service="service" @edit="onTableEdit" @add="onTableAdd" />
@@ -12,7 +9,7 @@
       </md-tab>
     </md-tabs>
     <crud-dialog ref="dialog"></crud-dialog>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -45,19 +42,24 @@ export default {
     onFormSave() {
       const { dialog, form } = this.$refs
 
+      if (!form.validate()) {
+        dialog.alert("Erros no formulário!")
+        return
+      }
+
       // Etapa 1: Confirmação das alterações
-      dialog.confirm("Salvar?").then((state) => {
+      dialog.confirm("Salvar ?").then(state => {
         // Etapa 2: Bloqueia a tela e efetua ação
         dialog.dialog("Salvando...")
 
         form
           .save()
-          .then((response) => {
+          .then(response => {
             // Etapa 3: Mostra a mensagem de sucesso e volta para o table
             dialog.alert("Salvo com sucesso!")
             this.tab = "table"
           })
-          .catch((error) => {
+          .catch(error => {
             dialog.alert("Erro ao salvar!")
             console.error(error)
           })
@@ -67,18 +69,18 @@ export default {
       const { dialog, form } = this.$refs
 
       // Etapa 1: Confirmação a ação
-      dialog.confirm("Remover?").then((state) => {
+      dialog.confirm("Remover?").then(state => {
         // Etapa 2: Bloqueia a tela e efetua a ação
         dialog.dialog("Removendo...")
 
         form
           .delete()
-          .then((response) => {
+          .then(response => {
             // Etapa 3: Mostra a mensagem de sucesso e volta para o table
             dialog.alert("Removido com sucesso!")
             this.tab = "table"
           })
-          .catch((error) => {
+          .catch(error => {
             dialog.alert("Erro ao remover!")
             console.error(error)
           })
@@ -119,6 +121,9 @@ export default {
   > .md-tabs-navigation {
     display: none;
   }
+}
+section {
+  width: 100%;
 }
 </style>
 

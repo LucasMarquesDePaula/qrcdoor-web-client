@@ -11,11 +11,11 @@
       </md-layout>
       <md-layout>
         <div>
-          <md-button class="md-icon-button" @click="setAll(meses, mesesOptions)" v-show="meses.length !== mesesOptions.length">
+          <md-button class="md-icon-button md-dense" @click="setAll(meses, mesesOptions)" v-show="meses.length !== mesesOptions.length">
             <md-tooltip md-direction="top">Selecionar Todos</md-tooltip>
             <md-icon>{{ meses.length === mesesOptions.length ? 'check_box' : meses.length ? 'indeterminate_check_box' : 'check_box_outline_blank' }}</md-icon>
           </md-button>
-          <md-button class="md-icon-button" @click="clearAll(meses)" v-show="meses.length">
+          <md-button class="md-icon-button md-dense" @click="clearAll(meses)" v-show="meses.length">
             <md-tooltip md-direction="top">Limpar</md-tooltip>
             <md-icon>clear</md-icon>
           </md-button>
@@ -33,11 +33,11 @@
       </md-layout>
       <md-layout>
         <div>
-          <md-button class="md-icon-button" @click="setAll(diasSemana, diasSemanaOptions)" v-show="diasSemana.length !== diasSemanaOptions.length">
+          <md-button class="md-icon-button md-dense" @click="setAll(diasSemana, diasSemanaOptions)" v-show="diasSemana.length !== diasSemanaOptions.length">
             <md-tooltip md-direction="top">Selecionar Todos</md-tooltip>
             <md-icon>{{ diasSemana.length === diasSemanaOptions.length ? 'check_box' : diasSemana.length ? 'indeterminate_check_box' : 'check_box_outline_blank' }}</md-icon>
           </md-button>
-          <md-button class="md-icon-button" @click="clearAll(diasSemana)" v-show="diasSemana.length">
+          <md-button class="md-icon-button md-dense" @click="clearAll(diasSemana)" v-show="diasSemana.length">
             <md-tooltip md-direction="top">Limpar</md-tooltip>
             <md-icon>clear</md-icon>
           </md-button>
@@ -51,6 +51,8 @@
 import AbstractFormTab from "@/components/abstract/crud/form-tab"
 
 import Vue from "vue"
+import fill from "lodash/fill"
+
 import { minLength, required } from "vuelidate/lib/validators"
 
 const diasSemanaOptions = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
@@ -106,12 +108,25 @@ export default {
     model(value) {
       // TODO: buscar dados de pessoas
       // value.senha = ""
+    },
+    diasSemana(value) {
+      const diasSemana = fill(new Array(7), 0)
+
+      for (let i = 0, { length } = value; i < length; i++) {
+        diasSemana[value[i]] = 1
+      }
+
+      this.model.diasSemana = diasSemana.join("")
+    },
+    meses(value) {
+      const meses = fill(new Array(12), 0)
+
+      for (let i = 0, { length } = value; i < length; i++) {
+        meses[value[i]] = 1
+      }
+
+      this.model.meses = meses.join("")
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
-

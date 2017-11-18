@@ -57,7 +57,7 @@
 import AbstractTab from "@/components/abstract/crud/form-tab"
 
 import isEmpty from "lodash/isEmpty"
-import service from "@service/chaves"
+import service from "@service/chave"
 
 export default {
   extends: AbstractTab,

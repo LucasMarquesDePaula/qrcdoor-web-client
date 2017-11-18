@@ -1,3 +1,3 @@
 import service from "@service"
 
-export default service("permissaoFuncoes")
+export default service("permissao-funcao")

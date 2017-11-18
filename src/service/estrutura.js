@@ -1,3 +1,3 @@
 import service from "@service"
 
-export default service("chaves")
+export default service("estrutura")

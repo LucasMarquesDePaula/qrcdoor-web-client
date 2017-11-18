@@ -27,11 +27,11 @@ export default {
           method: "get",
           auth
         })
-        .then((response) => {
+        .then(response => {
           self.logout()
           self.$router.push({ path: "/" })
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error)
           self.logout()
         })

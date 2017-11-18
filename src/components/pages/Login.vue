@@ -63,12 +63,12 @@ export default {
 
       service
         .post(qs.stringify(auth))
-        .then((response) => {
+        .then(response => {
           self.login(auth)
           // self.$store.dispatch("login", auth)
           self.$router.push({ path: "/" })
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error)
           console.error("Logout")
           self.logout()

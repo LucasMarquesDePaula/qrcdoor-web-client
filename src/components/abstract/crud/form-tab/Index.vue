@@ -6,11 +6,6 @@ export default {
       default() {
         return {}
       }
-    },
-    $v: {
-      default() {
-        return {}
-      }
     }
   },
   filters: {

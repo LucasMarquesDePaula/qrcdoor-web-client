@@ -4,7 +4,7 @@
       <md-layout md-row>
         <md-layout md-column md-flex="15" md-align="start" class="avatar-conteiner">
           <md-avatar class="md-large">
-            <img :src="model.foto ? `data:image/${model.fotoExtensao};base64,${model.foto}` : avatar" alt="Foto">
+            <img :src="`${baseURL}/pessoa/foto/${model.id}`" alt="Foto">
           </md-avatar>
           <md-avatar class="md-large avatar-overflow">
             <img src="~@images/pencil-edit-button.png" alt="Edit" @click="editFoto()" />
@@ -80,8 +80,9 @@ import TabPermissoes from "./tab/Permissoes"
 import Vue from "vue"
 
 import $ from "jquery"
-import avatar from "@images/avatar.png"
+// import avatar from "@images/avatar.png"
 import { email, minLength, required } from "vuelidate/lib/validators"
+import { baseURL } from "@service/config"
 
 export default {
   extends: AbstractForm,
@@ -93,7 +94,7 @@ export default {
   },
   data() {
     return {
-      avatar
+      baseURL
     }
   },
   validations: {

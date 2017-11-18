@@ -3,8 +3,8 @@
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container>
-          <label>Pessoa</label>
-          <md-autocomplete v-model="selection" print-attribute="nome" :fetch="fetchPessoa" @selected="selected" :debounce="500" />
+          <label>Permissao</label>
+          <md-autocomplete v-model="selection" print-attribute="nome" :fetch="fetchPermissao" @selected="selected" :debounce="500" />
         </md-input-container>
       </md-layout>
       <md-layout>
@@ -35,15 +35,12 @@
       </md-table-header>
 
       <md-table-body>
-        <md-table-row v-for="(item, index) in list" :key="index">
-          <md-table-cell>{{item.pessoa.nome}}</md-table-cell>
-          <md-table-cell>{{item.dataInicio | date}}</md-table-cell>
-          <md-table-cell>{{item.dataFim | date}}</md-table-cell>
-          <md-button class="md-icon-button" @click="edit(index)">
-            <md-icon>edit</md-icon>
-          </md-button>
+        <md-table-row v-for="(funcaoPessoa, index) in model.funcaoPermissoes" :key="index">
+          <md-table-cell>{{funcaoPessoa.pessoa.nome}}</md-table-cell>
+          <md-table-cell>{{funcaoPessoa.dataInicio}}</md-table-cell>
+          <md-table-cell>{{funcaoPessoa.dataFim}}</md-table-cell>
           <md-button class="md-icon-button" @click="remove(index)">
-            <md-icon>delete_forever</md-icon>
+            <md-icon>edit</md-icon>
           </md-button>
         </md-table-row>
       </md-table-body>
@@ -54,7 +51,7 @@
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
 
-import servicePessoa from "@service/pessoa"
+import servicePermissoes from "@service/pessoa"
 import serviceFuncaoPessoa from "@service/funcaoPessoa"
 
 export default {
@@ -62,30 +59,27 @@ export default {
   data() {
     return {
       form: {},
-      list: [],
       selection: ""
     }
   },
   methods: {
     add() {
-      if (this.form.pessoa) {
-        serviceFuncaoPessoa
-          .post({ funcao: this.model, ...this.form })
-          .then(response => {
-            console.log(response)
-            this.list.push(this.form)
-            this.form = {}
-            this.selection = ""
-          })
-          .catch(error => {
-            console.error(error)
-          })
+      this.selection = ""
+
+      if (!this.model.funcaoPermissoes) {
+        this.model.funcaoPermissoes = []
+      }
+
+      if (this.form.permissao) {
+        this.model.funcaoPermissoes.push(this.form)
+        this.form = {}
       }
     },
-    remove(index) {},
-    edit(index) {},
-    fetchPessoa(args) {
-      return this.fetch(servicePessoa, args)
+    remove(index) {
+      this.model.funcaoPermissoes
+    },
+    fetchPermissao(args) {
+      return this.fetch(servicePermissoes, args)
     },
     fetch(service, { q }) {
       return new Promise((resolve, reject) => {
@@ -107,12 +101,6 @@ export default {
     selected(item) {
       const { id, nome } = item
       this.form.pessoa = { id, nome }
-    }
-  },
-  watch: {
-    model() {
-      this.list = []
-      // serviceFuncaoPessoa.get({})
     }
   }
 }

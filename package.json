@@ -8,8 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "unit":
-      "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --fix --ext .js,.vue src test/unit/specs test/e2e/specs"
@@ -17,6 +16,7 @@
   "dependencies": {
     "amcharts": "^3.14.5",
     "axios": "^0.17.0",
+    "flatpickr": "^4.1.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
@@ -25,6 +25,7 @@
     "orb-js": "^0.1.5",
     "roboto-fontface": "^0.8.0",
     "vue": "^2.5.2",
+    "vue-datepicker": "^1.3.0",
     "vue-material": "^0.8.1",
     "vue-router": "^3.0.1",
     "vue-spinner": "^1.0.3",
@@ -109,5 +110,9 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

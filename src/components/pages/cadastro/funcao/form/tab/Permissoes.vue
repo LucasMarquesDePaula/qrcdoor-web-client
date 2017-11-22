@@ -16,7 +16,7 @@
       <md-layout>
         <md-input-container>
           <label>Fim</label>
-          <md-input type="date" v-model="form.dataFim"></md-input>
+          <md-input type="text" v-date="date" v-model="form.dataFim"></md-input>
         </md-input-container>
       </md-layout>
       <md-layout md-flex="10">

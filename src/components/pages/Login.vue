@@ -91,7 +91,7 @@ export default {
 
 <style lang="scss" scoped>
 section {
-  min-width: 420px;
+  width: 420px;
   position: absolute;
   top: 50%;
   left: 50%;

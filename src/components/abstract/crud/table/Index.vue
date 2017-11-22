@@ -76,7 +76,7 @@ export default {
             sort: sort.replace(/,$/, ""),
             size: this.pagination.size,
             page: this.pagination.page - 1,
-            ...this.filter
+            q: JSON.stringify(this.filter)
           }
         })
         .then(response => {
@@ -90,7 +90,7 @@ export default {
           dialog.close()
         })
         .catch(error => {
-          dialog.alert(error)
+          dialog.alert(error.response.data)
         })
     },
 

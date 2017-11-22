@@ -2,6 +2,11 @@
 import moment from "moment"
 export default {
   props: {
+    $v: {
+      default() {
+        return {}
+      }
+    },
     model: {
       default() {
         return {}

@@ -15,7 +15,7 @@
             <md-layout md-flex="50">
               <md-input-container :class="{ 'md-input-invalid': $v.model.nome.$error }">
                 <label>Nome</label>
-                <md-input v-model.trim="model.nome" @blur="$v.model.nome.$touch" :maxlength="255"></md-input>
+                <md-input v-model.trim="model.nome" v-datepicker @blur="$v.model.nome.$touch" :maxlength="255"></md-input>
                 <!-- <span class="md-error" v-show="$v.model.nome.required">Valor Obrigatório</span> -->
                 <span class="md-error" v-show="$v.model.nome.$error">Valor inválido</span>
               </md-input-container>

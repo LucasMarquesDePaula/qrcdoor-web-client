@@ -82,17 +82,17 @@ export default {
       meses: []
     }
   },
-  validations: {
-    model: {
-      descricao: {
-        required,
-        minLength: minLength(4)
-      },
-      situacao: {
-        required
-      }
-    }
-  },
+  // validations: {
+  //   model: {
+  //     descricao: {
+  //       required,
+  //       minLength: minLength(4)
+  //     },
+  //     situacao: {
+  //       required
+  //     }
+  //   }
+  // }
   methods: {
     setAll(target, options) {
       target.splice(0)

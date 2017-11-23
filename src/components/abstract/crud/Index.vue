@@ -58,6 +58,7 @@ export default {
             // Etapa 3: Mostra a mensagem de sucesso e volta para o table
             dialog.alert("Salvo com sucesso!")
             Vue.set(this.model, "id", response.data.id)
+            this.modelHash = hash(modelHash)
             // this.tab = "table"
           })
           .catch(error => {

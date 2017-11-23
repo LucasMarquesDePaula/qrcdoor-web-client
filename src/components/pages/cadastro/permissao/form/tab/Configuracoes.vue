@@ -1,5 +1,59 @@
 <template>
   <section>
+    <md-layout>
+      <md-layout>
+        <md-checkbox v-model="model.abre">Abre</md-checkbox>
+      </md-layout>
+      <md-layout>
+        <md-checkbox v-model="model.fecha">Fecha</md-checkbox>
+      </md-layout>
+      <md-layout>
+        <md-checkbox v-model="model.herda">Herda</md-checkbox>
+      </md-layout>
+      <md-layout>
+        <md-checkbox v-model="model.gerencia">Gerencia</md-checkbox>
+      </md-layout>
+      <md-layout>
+        <md-checkbox v-model="model.monitora">Monitora</md-checkbox>
+      </md-layout>
+    </md-layout>
+
+    <label>Período de Vigência</label>
+    <md-layout :md-gutter="true">
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': $v.model.dataInicio.$error }">
+          <label>Inicio</label>
+          <md-input type="date" v-model="model.dataInicio" @blur="$v.model.dataInicio.$touch"></md-input>
+          <span class="md-error" v-show="$v.model.dataInicio.$error">Valor inválido</span>
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': $v.model.dataFim.$error }">
+          <label>Fim</label>
+          <md-input type="date" v-model="model.dataFim" @blur="$v.model.dataFim.$touch"></md-input>
+          <span class="md-error" v-show="$v.model.dataFim.$error">Valor inválido</span>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+
+    <label>Horário Permitido</label>
+    <md-layout :md-gutter="true">
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': $v.model.horaInicio.$error }">
+          <label>Inicio</label>
+          <md-input type="time" v-model="model.horaInicio" @blur="$v.model.horaInicio.$touch"></md-input>
+          <span class="md-error" v-show="$v.model.horaInicio.$error">Valor inválido</span>
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': $v.model.horaFim.$error }">
+          <label>Fim</label>
+          <md-input type="time" v-model="model.horaFim" @blur="$v.model.horaFim.$touch"></md-input>
+          <span class="md-error" v-show="$v.model.horaFim.$error">Valor inválido</span>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+
     <label>Meses</label>
     <md-layout :md-gutter="true">
       <md-layout md-flex="80">
@@ -82,17 +136,6 @@ export default {
       meses: []
     }
   },
-  // validations: {
-  //   model: {
-  //     descricao: {
-  //       required,
-  //       minLength: minLength(4)
-  //     },
-  //     situacao: {
-  //       required
-  //     }
-  //   }
-  // }
   methods: {
     setAll(target, options) {
       target.splice(0)
@@ -106,8 +149,13 @@ export default {
   },
   watch: {
     model(value) {
-      // TODO: buscar dados de pessoas
-      // value.senha = ""
+      value.abre = Boolean(value.abre)
+      value.fecha = Boolean(value.fecha)
+      value.herda = Boolean(value.herda)
+      value.gerencia = Boolean(value.gerencia)
+      value.monitora = Boolean(value.monitora)
+      value.diasSemana = value.diasSemana || "000000"
+      value.meses = value.meses || "000000000000"
     },
     diasSemana(value) {
       const diasSemana = fill(new Array(7), 0)

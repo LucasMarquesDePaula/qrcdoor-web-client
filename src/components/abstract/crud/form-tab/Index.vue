@@ -13,6 +13,11 @@ export default {
       }
     }
   },
+  // computed: {
+  //   $v() {
+  //     return this.validation
+  //   }
+  // },
   filters: {
     date(value) {
       return moment(value).format("DD/MM/YYYY")

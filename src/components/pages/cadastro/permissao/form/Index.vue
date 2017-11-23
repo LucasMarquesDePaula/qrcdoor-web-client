@@ -4,7 +4,7 @@
 
       <md-layout :md-gutter="true">
         <md-layout md-flex="20">
-          <md-input-container>
+          <md-input-container v-if="model.id">
             <label>Cód.</label>
             <md-input v-model.trim="model.id" :readonly="true"></md-input>
           </md-input-container>
@@ -20,12 +20,12 @@
 
       <md-tabs>
         <md-tab md-label="Configurações">
-          <tab-configuracoes :model="model" />
+          <tab-configuracoes :model="model" :$v="$v" />
         </md-tab>
-        <md-tab md-label="Pessoas">
+        <md-tab v-if="model.id" md-label="Pessoas">
           <tab-pessoas :model="model" />
         </md-tab>
-        <md-tab md-label="Funções">
+        <md-tab v-if="model.id" md-label="Funções">
           <tab-funcoes :model="model" />
         </md-tab>
       </md-tabs>
@@ -64,7 +64,16 @@ export default {
         required,
         minLength: minLength(4)
       },
-      situacao: {
+      dataInicio: {
+        required
+      },
+      dataFim: {
+        required
+      },
+      horaInicio: {
+        required
+      },
+      horaFim: {
         required
       }
     }

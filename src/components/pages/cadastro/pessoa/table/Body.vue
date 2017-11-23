@@ -4,7 +4,7 @@
       <md-table-cell md-numeric>{{model.id}}</md-table-cell>
       <md-table-cell>
         <md-avatar>
-          <img :src="`${baseURL}/pessoa/foto/${model.id}`">
+          <img :src="`${baseURL}/pessoa/foto/${model.id}?v=${Date.now()}`">
         </md-avatar>
       </md-table-cell>
       <md-table-cell>{{model.nome}}</md-table-cell>

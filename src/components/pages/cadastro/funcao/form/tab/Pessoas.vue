@@ -21,7 +21,7 @@
       </md-layout>
       <md-layout md-flex="10">
         <md-button @click="add()" class="md-icon-button md-raised md-primary">
-          <md-icon>add</md-icon>
+          <md-icon>{{form.id ? "save" : "add"}}</md-icon>
         </md-button>
       </md-layout>
     </md-layout>
@@ -69,11 +69,13 @@ export default {
   methods: {
     add() {
       if (this.form.pessoa) {
-        serviceFuncaoPessoa
-          .post({ funcao: this.model, ...this.form })
+        const method = this.form.id ? "put" : "post"
+        serviceFuncaoPessoa[method]({ funcao: this.model, ...this.form })
           .then(response => {
-            console.log(response)
-            this.list.push(this.form)
+            if (method === "post") {
+              this.form.id = response.data.id
+              this.list.push(this.form)
+            }
             this.form = {}
             this.selection = ""
           })
@@ -82,8 +84,20 @@ export default {
           })
       }
     },
-    remove(index) {},
-    edit(index) {},
+    remove(index) {
+      serviceFuncaoPessoa
+        .delete(this.list[index].id)
+        .then(response => {
+          this.list.splice(index, 1)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    edit(index) {
+      this.form = this.list[index]
+      this.selection = this.form.pessoa.nome
+    },
     fetchPessoa(args) {
       return this.fetch(servicePessoa, args)
     },
@@ -92,8 +106,7 @@ export default {
         service
           .get({
             params: {
-              nome: q,
-              situacao: "A"
+              q: JSON.stringify({ nome: q, situacao: "A" })
             }
           })
           .then(response => {
@@ -110,9 +123,19 @@ export default {
     }
   },
   watch: {
-    model() {
+    model(value) {
       this.list = []
-      // serviceFuncaoPessoa.get({})
+      const { id } = value
+      if (id) {
+        serviceFuncaoPessoa
+          .get({ params: { q: JSON.stringify({ funcao: { id } }) } })
+          .then(response => {
+            this.list = response.data
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
     }
   }
 }

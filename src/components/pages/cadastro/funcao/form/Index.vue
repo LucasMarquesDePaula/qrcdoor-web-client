@@ -30,7 +30,7 @@
         </md-layout>
       </md-layout>
 
-      <md-tabs>
+      <md-tabs v-show="model.id">
         <md-tab md-label="Pessoas">
           <tab-pessoas :model="model" :v="$v" />
         </md-tab>

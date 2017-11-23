@@ -14,6 +14,7 @@
 
 <script>
 import CrudDialog from "./dialog"
+import Vue from "vue"
 // import isEmpty from "lodash/isEmpty"
 import { mapGetters } from "vuex"
 import hash from "object-hash"
@@ -56,7 +57,8 @@ export default {
           .then(response => {
             // Etapa 3: Mostra a mensagem de sucesso e volta para o table
             dialog.alert("Salvo com sucesso!")
-            this.tab = "table"
+            Vue.set(this.model, "id", response.data.id)
+            // this.tab = "table"
           })
           .catch(error => {
             dialog.alert("Erro ao salvar!")

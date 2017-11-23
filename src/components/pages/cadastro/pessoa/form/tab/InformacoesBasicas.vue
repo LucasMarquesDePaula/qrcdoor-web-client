@@ -23,7 +23,7 @@
       <md-layout>
         <md-input-container :class="{ 'md-input-invalid': $v.model.email.$error }">
           <label>Email</label>
-          <md-input v-model="model.email" @blur="$v.model.email.$touch" required></md-input>
+          <md-input type="email" v-model="model.email" @blur="$v.model.email.$touch" required></md-input>
           <span class="md-error" v-show="$v.model.email.$error">Valor inválido</span>
         </md-input-container>
       </md-layout>

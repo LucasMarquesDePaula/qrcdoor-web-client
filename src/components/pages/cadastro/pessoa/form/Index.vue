@@ -1,10 +1,11 @@
 <template>
   <md-card>
     <md-card-content>
+      <md-progress v-show="progress" :md-progress="progress"></md-progress>
       <md-layout md-row>
         <md-layout md-column md-flex="15" md-align="start" class="avatar-conteiner">
           <md-avatar class="md-large">
-            <img :src="`${baseURL}/pessoa/foto/${model.id}`" alt="Foto">
+            <img :src="foto">
           </md-avatar>
           <md-avatar class="md-large avatar-overflow">
             <img src="~@images/pencil-edit-button.png" alt="Edit" @click="editFoto()" />
@@ -15,8 +16,7 @@
             <md-layout md-flex="50">
               <md-input-container :class="{ 'md-input-invalid': $v.model.nome.$error }">
                 <label>Nome</label>
-                <md-input v-model.trim="model.nome" v-datepicker @blur="$v.model.nome.$touch" :maxlength="255"></md-input>
-                <!-- <span class="md-error" v-show="$v.model.nome.required">Valor Obrigatório</span> -->
+                <md-input v-model.trim="model.nome" @blur="$v.model.nome.$touch" :maxlength="255"></md-input>
                 <span class="md-error" v-show="$v.model.nome.$error">Valor inválido</span>
               </md-input-container>
             </md-layout>
@@ -82,6 +82,7 @@ import Vue from "vue"
 import $ from "jquery"
 // import avatar from "@images/avatar.png"
 import { email, minLength, required } from "vuelidate/lib/validators"
+import axios from "axios"
 import { baseURL } from "@service/config"
 
 export default {
@@ -94,7 +95,9 @@ export default {
   },
   data() {
     return {
-      baseURL
+      baseURL,
+      foto: "",
+      progress: 0
     }
   },
   validations: {
@@ -141,26 +144,33 @@ export default {
 
       // Add listener
       $input.change(event => {
-        const file = event.currentTarget.files[0]
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => {
-          const { result } = reader
-          let foto = ""
-          let fotoExtensao = ""
-          for (let i = 0, len = result.length; i < len; i++) {
-            if (result[i] === ",") {
-              foto = result.substring(i + 1)
-              fotoExtensao = result.substring(0, i)
-              fotoExtensao = fotoExtensao.replace("data:image/", "")
-              fotoExtensao = fotoExtensao.replace(";base64", "")
-              break
-            }
+        const config = {
+          onUploadProgress: event => {
+            this.progress = Math.round(event.loaded * 100 / event.total)
           }
-          Vue.set(this.model, "foto", foto)
-          Vue.set(this.model, "fotoExtensao", fotoExtensao)
         }
-        $input.remove()
+
+        const file = event.currentTarget.files[0]
+        console.log(file)
+        const data = new FormData()
+        data.append("file", file)
+
+        axios
+          .put(`${baseURL}/pessoa/foto/${this.model.id}`, data, config)
+          .then(res => {
+            this.progress = 0
+            this.foto = `${baseURL}/pessoa/foto/${this.model
+              .id}?v=${Date.now()}`
+            $input.remove()
+          })
+          .catch(error => {
+            this.progress = 0
+            this.foto = `${baseURL}/pessoa/foto/${this.model
+              .id}?v=${Date.now()}`
+            $input.remove()
+            // TODO mostrar mensagem
+            console.error(error)
+          })
       })
 
       // Trigger
@@ -170,6 +180,7 @@ export default {
   watch: {
     model(value) {
       value.senha = ""
+      this.foto = `${baseURL}/pessoa/foto/${value.id}?v=${Date.now()}`
     }
   }
 }

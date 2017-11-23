@@ -39,10 +39,10 @@
 </template>
 
 <script>
+import { minLength, required } from "vuelidate/lib/validators"
+import { mapActions } from "vuex"
 import qs from "qs"
 import service from "@service/login"
-import { mapActions } from "vuex"
-import { minLength, required } from "vuelidate/lib/validators"
 
 export default {
   data() {

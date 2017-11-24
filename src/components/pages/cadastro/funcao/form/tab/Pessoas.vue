@@ -126,11 +126,20 @@ export default {
     model(value) {
       this.list = []
       const { id } = value
+
       if (id) {
         serviceFuncaoPessoa
-          .get({ params: { q: JSON.stringify({ funcao: { id } }) } })
+          .get({
+            params: {
+              q: JSON.stringify({
+                funcao: {
+                  id: id || 0
+                }
+              })
+            }
+          })
           .then(response => {
-            this.list = response.data
+            this.list = response.data.content
           })
           .catch(error => {
             console.error(error)

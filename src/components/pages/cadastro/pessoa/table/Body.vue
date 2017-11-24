@@ -29,7 +29,7 @@
 
 <script>
 import AbstractTableBody from "@/components/abstract/crud/table-body"
-// import avatar from "@images/avatar.png"
+
 import { baseURL } from "@service/config"
 export default {
   extends: AbstractTableBody,
@@ -42,11 +42,6 @@ export default {
     },
     situacao(value) {
       return value === "A" ? "Ativa" : value === "I" ? "Inativa" : ""
-    }
-  },
-  computed: {
-    avatar() {
-      return avatar
     }
   }
 }

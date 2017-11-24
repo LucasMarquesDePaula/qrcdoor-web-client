@@ -23,10 +23,10 @@
           <tab-configuracoes :model="model" :$v="$v" />
         </md-tab>
         <md-tab v-if="model.id" md-label="Pessoas">
-          <tab-pessoas :model="model" />
+          <tab-pessoas :model="model" :$v="$v" />
         </md-tab>
         <md-tab v-if="model.id" md-label="Funções">
-          <tab-funcoes :model="model" />
+          <tab-funcoes :model="model" :$v="$v" />
         </md-tab>
       </md-tabs>
     </md-card-content>

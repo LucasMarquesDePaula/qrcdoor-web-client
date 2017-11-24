@@ -84,7 +84,7 @@ export default {
 <style lang="scss" scopped>
 .router-view {
   position: absolute;
-  height: calc(100% - 65px);
+  min-height: calc(100% - 65px);
   width: 100%;
   background-color: #e0e0e0;
 }

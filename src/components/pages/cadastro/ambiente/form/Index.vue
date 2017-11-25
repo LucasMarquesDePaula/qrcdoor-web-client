@@ -1,38 +1,46 @@
 <template>
   <md-card>
     <md-card-content>
-      <md-layout :md-gutter="true">
-        <md-layout md-flex="20">
-          <md-input-container>
-            <label>Cód.</label>
-            <md-input v-model.trim="model.id" :readonly="true"></md-input>
-          </md-input-container>
+      <md-progress v-show="progress" :md-progress="progress"></md-progress>
+      <md-layout md-row>
+        <md-layout v-show="model.id" md-column md-flex="15" md-align="start" class="avatar-conteiner">
+          <md-avatar class="md-large">
+            <img :src="foto">
+          </md-avatar>
+          <md-avatar class="md-large avatar-overflow">
+            <img src="~@images/pencil-edit-button.png" alt="Edit" @click="editFoto()" />
+          </md-avatar>
         </md-layout>
-        <md-layout md-flex="80">
-          <md-input-container :class="{ 'md-input-invalid': $v.model.descricao.$error }">
-            <label>Descrição</label>
-            <md-input v-model.trim="model.descricao" @blur="$v.model.descricao.$touch" :maxlength="255"></md-input>
-            <span class="md-error" v-show="$v.model.descricao.$error">Valor inválido</span>
-          </md-input-container>
+        <md-layout md-column>
+          <md-layout :md-gutter="true">
+            <md-layout md-flex="50">
+              <md-input-container :class="{ 'md-input-invalid': $v.model.descricao.$error }">
+                <label>Descrição</label>
+                <md-input v-model.trim="model.descricao" @blur="$v.model.descricao.$touch" :maxlength="255"></md-input>
+                <span class="md-error" v-show="$v.model.descricao.$error">Valor inválido</span>
+              </md-input-container>
+            </md-layout>
+
+            <md-layout md-flex="30">
+              <md-input-container :class="{ 'md-input-invalid': $v.model.situacao.$error }">
+                <label>Situação</label>
+                <md-select v-model.trim="model.situacao" @closed="$v.model.situacao.$touch">
+                  <md-option value="A">Ativo</md-option>
+                  <md-option value="I">Inativo</md-option>
+                </md-select>
+                <span class="md-error" v-show="$v.model.situacao.$error">Valor inválido</span>
+              </md-input-container>
+            </md-layout>
+          </md-layout>
         </md-layout>
       </md-layout>
 
-      <md-layout>
-        <md-layout md-flex="25">
-          <md-input-container :class="{ 'md-input-invalid': $v.model.situacao.$error }">
-            <label>Situação</label>
-            <md-select v-model.trim="model.situacao" @closed="$v.model.situacao.$touch">
-              <md-option value="A">Ativo</md-option>
-              <md-option value="I">Inativo</md-option>
-            </md-select>
-            <span class="md-error" v-show="$v.model.situacao.$error">Valor inválido</span>
-          </md-input-container>
-        </md-layout>
-      </md-layout>
-
-      <md-tabs>
-        <md-tab md-label="Pessoas">
-          <tab-pessoas :model="model" :v="$v" />
+      <md-tabs v-show="model.id">
+        <md-tab md-label="Informações Básicas">
+          <tab-informacoes-basicas :model="model" :$v="$v" />
+        </md-tab>
+        <md-tab md-label="Permissões">
+          <tab-permissoes :model="model" :$v="$v" />
         </md-tab>
       </md-tabs>
     </md-card-content>
@@ -44,19 +52,34 @@
 
 <script>
 import AbstractForm from "@/components/abstract/crud/form"
-import TabPessoas from "./tab/Pessoas"
+import TabInformacoesBasicas from "./tab/InformacoesBasicas"
+import TabPermissoes from "./tab/Permissoes"
 
 import Vue from "vue"
 
-import { minLength, required } from "vuelidate/lib/validators"
+import $ from "jquery"
+// import avatar from "@images/avatar.png"
+import {
+  minValue,
+  minLength,
+  numeric,
+  required
+} from "vuelidate/lib/validators"
+import axios from "axios"
+import { baseURL } from "@service/config"
 
 export default {
   extends: AbstractForm,
   components: {
-    TabPessoas
+    TabInformacoesBasicas,
+    TabPermissoes
   },
   data() {
-    return {}
+    return {
+      baseURL,
+      foto: "",
+      progress: 0
+    }
   },
   validations: {
     model: {
@@ -66,14 +89,66 @@ export default {
       },
       situacao: {
         required
+      },
+      tempoMaximoAbertura: {
+        minValue: minValue(0),
+        numeric
+      },
+      quantidadeMaximaPessoas: {
+        minValue: minValue(0),
+        numeric
       }
     }
   },
-  methods: {},
+  methods: {
+    editFoto() {
+      // Create element
+      const $input = $("<input>", {
+        type: "file",
+        accept: "image/x-png,image/jpeg"
+      })
+
+      // Append to render
+      $input.hide(0).appendTo(this.$el)
+
+      // Add listener
+      $input.change(event => {
+        const config = {
+          onUploadProgress: event => {
+            this.progress = Math.round(event.loaded * 100 / event.total)
+          }
+        }
+
+        const file = event.currentTarget.files[0]
+        console.log(file)
+        const data = new FormData()
+        data.append("file", file)
+
+        axios
+          .put(`${baseURL}/estrutura/foto/${this.model.id}`, data, config)
+          .then(res => {
+            this.progress = 0
+            this.foto = `${baseURL}/estrutura/foto/${this.model
+              .id}?v=${Date.now()}`
+            $input.remove()
+          })
+          .catch(error => {
+            this.progress = 0
+            this.foto = `${baseURL}/estrutura/foto/${this.model
+              .id}?v=${Date.now()}`
+            $input.remove()
+            // TODO mostrar mensagem
+            console.error(error)
+          })
+      })
+
+      // Trigger
+      $input.click()
+    }
+  },
   watch: {
     model(value) {
-      // TODO: buscar dados de pessoas
-      // value.senha = ""
+      this.foto = `${baseURL}/pessoa/foto/${value.id}?v=${Date.now()}`
     }
   }
 }

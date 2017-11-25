@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container>
@@ -48,14 +48,13 @@
         </md-table-row>
       </md-table-body>
     </md-table>
-  </div>
+  </section>
 </template>
 
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
 
-import servicePessoa from "@service/pessoa"
-import serviceFuncaoPessoa from "@service/funcaoPessoa"
+import services from "@service/all"
 
 export default {
   extends: AbstractTab,
@@ -70,7 +69,8 @@ export default {
     add() {
       if (this.form.pessoa) {
         const method = this.form.id ? "put" : "post"
-        serviceFuncaoPessoa[method]({ funcao: this.model, ...this.form })
+        services.funcaoPessoa
+          [method]({ funcao: this.model, ...this.form })
           .then(response => {
             if (method === "post") {
               this.form.id = response.data.id
@@ -85,7 +85,7 @@ export default {
       }
     },
     remove(index) {
-      serviceFuncaoPessoa
+      services.funcaoPessoa
         .delete(this.list[index].id)
         .then(response => {
           this.list.splice(index, 1)
@@ -99,7 +99,7 @@ export default {
       this.selection = this.form.pessoa.nome
     },
     fetchPessoa(args) {
-      return this.fetch(servicePessoa, args)
+      return this.fetch(services.pessoa, args)
     },
     fetch(service, { q }) {
       return new Promise((resolve, reject) => {
@@ -128,7 +128,7 @@ export default {
       const { id } = value
 
       if (id) {
-        serviceFuncaoPessoa
+        services.funcaoPessoa
           .get({
             params: {
               q: JSON.stringify({

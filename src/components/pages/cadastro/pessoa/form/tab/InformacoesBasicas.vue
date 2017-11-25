@@ -47,7 +47,6 @@
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container :class="{ 'md-input-invalid': $v.model.login.$error }">
-          <md-icon>account_circle</md-icon>
           <label>Login</label>
           <md-input v-model="model.login" required></md-input>
           <span class="md-error" v-show="$v.model.login.$error">Valor inválido</span>

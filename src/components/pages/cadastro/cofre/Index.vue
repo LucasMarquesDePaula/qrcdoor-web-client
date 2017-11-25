@@ -34,16 +34,10 @@
 
 <script>
 import Permissoes from "./Permissoes"
-import model from "./model"
 
 export default {
   components: {
     Permissoes
-  },
-  data() {
-    return {
-      model
-    }
   }
 }
 </script>

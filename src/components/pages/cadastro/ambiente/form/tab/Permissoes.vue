@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container>
@@ -26,6 +26,7 @@
       </md-layout>
     </md-layout>
     <md-table>
+
       <md-table-header>
         <md-table-row>
           <md-table-head>Nome</md-table-head>
@@ -47,8 +48,9 @@
           </md-button>
         </md-table-row>
       </md-table-body>
+
     </md-table>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -69,7 +71,7 @@ export default {
     add() {
       if (this.form.permissao) {
         const method = this.form.id ? "put" : "post"
-        services.funcaoPermissao
+        services.permissaoEstrutura
           [method]({ funcao: this.model, ...this.form })
           .then(response => {
             if (method === "post") {
@@ -85,7 +87,7 @@ export default {
       }
     },
     remove(index) {
-      services.funcaoPermissao
+      services.permissaoEstrutura
         .delete(this.list[index].id)
         .then(response => {
           this.list.splice(index, 1)
@@ -128,7 +130,7 @@ export default {
       const { id } = value
 
       if (id) {
-        services.funcaoPermissao
+        services.permissaoEstrutura
           .get({
             params: {
               q: JSON.stringify({

@@ -3,7 +3,7 @@ import AbstractCrud from "@/components/abstract/crud"
 import CrudForm from "./form"
 import CrudTable from "./table"
 
-import service from "@service/funcao"
+import service from "@service/ambiente"
 
 export default {
   extends: AbstractCrud,
@@ -16,7 +16,7 @@ export default {
       return service
     },
     title() {
-      return "Cadastro Função"
+      return "Cadastro Ambiente"
     }
   }
 }
@@ -24,6 +24,6 @@ export default {
 
 <style lang="scss" scoped>
 section {
-  max-width: 750px;
+  max-width: 900px;
 }
 </style>

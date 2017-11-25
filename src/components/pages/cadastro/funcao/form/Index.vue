@@ -78,7 +78,6 @@ export default {
   watch: {
     model(value) {
       // TODO: buscar dados de pessoas
-      // value.senha = ""
     }
   }
 }

@@ -29,6 +29,9 @@
               <span v-if="!$v.password.minLength">Senha deve possuír no mínimo {{$v.password.$params.minLength.min}} caracteres</span>
             </span>
           </md-input-container>
+          <span class="md-error" v-show="error">
+            {{error}}
+          </span>
           <md-card-actions>
             <md-button type="submit" class="md-raised md-primary bt-align">Logar</md-button>
           </md-card-actions>
@@ -48,7 +51,8 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      error: ""
     }
   },
   methods: {
@@ -64,13 +68,16 @@ export default {
       service
         .post(qs.stringify(auth))
         .then(response => {
-          self.login(auth)
-          // self.$store.dispatch("login", auth)
-          self.$router.push({ path: "/" })
+          if (response.data.trim() === "success") {
+            self.login(auth)
+            self.$router.push({ path: "/" })
+            return
+          }
+
+          this.error = "Usuario e senha não encontrados"
         })
         .catch(error => {
           console.error(error)
-          console.error("Logout")
           self.logout()
           // self.$store.dispatch("logout")
         })

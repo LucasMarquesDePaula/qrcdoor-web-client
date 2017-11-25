@@ -35,11 +35,11 @@
         </md-layout>
       </md-layout>
 
-      <md-tabs v-show="model.id">
+      <md-tabs>
         <md-tab md-label="Informações Básicas">
           <tab-informacoes-basicas :model="model" :$v="$v" />
         </md-tab>
-        <md-tab md-label="Permissões">
+        <md-tab v-show="model.id" md-label="Permissões">
           <tab-permissoes :model="model" :$v="$v" />
         </md-tab>
       </md-tabs>

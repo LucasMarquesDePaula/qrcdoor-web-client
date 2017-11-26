@@ -68,13 +68,13 @@ export default {
       service
         .post(qs.stringify(auth))
         .then(response => {
-          if (response.data.trim() === "success") {
-            self.login(auth)
-            self.$router.push({ path: "/" })
-            return
-          }
+          // if (response.data.trim() === "success") {
+          self.login(auth)
+          self.$router.push({ path: "/" })
+          // return
+          // }
 
-          this.error = "Usuario e senha não encontrados"
+          // this.error = "Usuario e senha não encontrados"
         })
         .catch(error => {
           console.error(error)

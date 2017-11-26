@@ -55,17 +55,17 @@ new Vue({
     const currentPath = this.$router.currentRoute.path
 
     this.$router.beforeEach((from, to, next) => {
-      if (from.path === loginPath) {
-        // Se estiver logado então desloga
-        next(auth ? "/logout" : true)
-        return
-      }
-      next(auth ? true : loginPath)
-      // next()
+      // if (from.path === loginPath) {
+      //   // Se estiver logado então desloga
+      //   next(auth ? "/logout" : true)
+      //   return
+      // }
+      // next(auth ? true : loginPath)
+      next()
     })
 
     if (!auth && currentPath !== loginPath) {
-      router.push({ name: "login" })
+      // router.push({ name: "login" })
     }
   }
 })

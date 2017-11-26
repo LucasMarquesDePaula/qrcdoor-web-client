@@ -40,6 +40,7 @@
 import AbstractForm from "@/components/abstract/crud/form"
 import TabConfiguracoes from "./tab/Configuracoes"
 import TabFuncoes from "./tab/Funcoes"
+import TabEstruturas from "./tab/Estruturas"
 import TabPessoas from "./tab/Pessoas"
 
 import Vue from "vue"
@@ -50,6 +51,7 @@ export default {
   extends: AbstractForm,
   components: {
     TabConfiguracoes,
+    TabEstruturas,
     TabFuncoes,
     TabPessoas
   },

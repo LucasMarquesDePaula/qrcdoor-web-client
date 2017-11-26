@@ -1,10 +1,22 @@
 <template>
-  <section>
+  <div>
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container>
-          <label>Permissao</label>
-          <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchPermissao" @selected="selected" :debounce="500" />
+          <label>Estrutura</label>
+          <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchEstrutura" @selected="selected" :debounce="500" />
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container>
+          <label>Inicio</label>
+          <md-input type="date" v-model="form.dataInicio"></md-input>
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container>
+          <label>Fim</label>
+          <md-input type="date" v-model="form.dataFim"></md-input>
         </md-input-container>
       </md-layout>
       <md-layout md-flex="10">
@@ -14,24 +26,27 @@
       </md-layout>
     </md-layout>
     <md-table>
-
       <md-table-header>
         <md-table-row>
-          <md-table-head>Descrição</md-table-head>
+          <md-table-head>Nome</md-table-head>
+          <md-table-head>Inicio</md-table-head>
+          <md-table-head>Fim</md-table-head>
         </md-table-row>
       </md-table-header>
 
       <md-table-body>
         <md-table-row v-for="(item, index) in list" :key="index">
-          <md-table-cell>{{item.id.permissao.descricao}}</md-table-cell>
+          <md-table-cell>{{item.estrutura.descricao}}</md-table-cell>
+          <md-button class="md-icon-button" @click="edit(index)">
+            <md-icon>edit</md-icon>
+          </md-button>
           <md-button class="md-icon-button" @click="remove(index)">
             <md-icon>delete_forever</md-icon>
           </md-button>
         </md-table-row>
       </md-table-body>
-
     </md-table>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -50,14 +65,13 @@ export default {
   },
   methods: {
     add() {
-      if (this.form.permissao) {
+      if (this.form.estrutura) {
         const method = this.form.id ? "put" : "post"
-        services.permissaoEstrutura
-          [method]({ id: { estrutura: { id: this.model.id }, ...this.form } })
+        services.funcaoEstrutura
+          [method]({ funcao: this.model, ...this.form })
           .then(response => {
             if (method === "post") {
-              this.form.id = response.data.id
-              this.list.push(this.form)
+              this.list.push(response.data)
             }
             this.form = {}
             this.selection = ""
@@ -68,7 +82,7 @@ export default {
       }
     },
     remove(index) {
-      services.permissaoEstrutura
+      services.funcaoEstrutura
         .delete(this.list[index].id)
         .then(response => {
           this.list.splice(index, 1)
@@ -79,10 +93,10 @@ export default {
     },
     edit(index) {
       this.form = this.list[index]
-      this.selection = this.form.permissao.nome
+      this.selection = this.form.estrutura.nome
     },
-    fetchPermissao(args) {
-      return this.fetch(services.permissao, args)
+    fetchEstrutura(args) {
+      return this.fetch(services.estrutura, args)
     },
     fetch(service, { q }) {
       return new Promise((resolve, reject) => {
@@ -102,7 +116,7 @@ export default {
     },
     selected(item) {
       const { id, nome } = item
-      this.form.permissao = { id, nome }
+      this.form.estrutura = { id, nome }
     }
   },
   watch: {
@@ -111,14 +125,12 @@ export default {
       const { id } = value
 
       if (id) {
-        services.permissaoEstrutura
+        services.funcaoEstrutura
           .get({
             params: {
               q: JSON.stringify({
-                id: {
-                  estrutura: {
-                    id: id || 0
-                  }
+                funcao: {
+                  id: id || 0
                 }
               })
             }

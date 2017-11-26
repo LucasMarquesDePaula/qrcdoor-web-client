@@ -24,6 +24,6 @@ export default {
 
 <style lang="scss" scoped>
 section {
-  max-width: 900px;
+  max-width: 1000px;
 }
 </style>

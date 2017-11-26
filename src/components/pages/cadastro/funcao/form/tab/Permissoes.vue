@@ -1,22 +1,10 @@
 <template>
   <div>
     <md-layout :md-gutter="true">
-      <md-layout>
+      <md-layout md-flex="60">
         <md-input-container>
           <label>Permissao</label>
           <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchPermissao" @selected="selected" :debounce="500" />
-        </md-input-container>
-      </md-layout>
-      <md-layout>
-        <md-input-container>
-          <label>Inicio</label>
-          <md-input type="date" v-model="form.dataInicio"></md-input>
-        </md-input-container>
-      </md-layout>
-      <md-layout>
-        <md-input-container>
-          <label>Fim</label>
-          <md-input type="date" v-model="form.dataFim"></md-input>
         </md-input-container>
       </md-layout>
       <md-layout md-flex="10">
@@ -28,20 +16,13 @@
     <md-table>
       <md-table-header>
         <md-table-row>
-          <md-table-head>Nome</md-table-head>
-          <md-table-head>Inicio</md-table-head>
-          <md-table-head>Fim</md-table-head>
+          <md-table-head>Descrição</md-table-head>
         </md-table-row>
       </md-table-header>
 
       <md-table-body>
         <md-table-row v-for="(item, index) in list" :key="index">
           <md-table-cell>{{item.permissao.descricao}}</md-table-cell>
-          <md-table-cell>{{item.dataInicio | date}}</md-table-cell>
-          <md-table-cell>{{item.dataFim | date}}</md-table-cell>
-          <md-button class="md-icon-button" @click="edit(index)">
-            <md-icon>edit</md-icon>
-          </md-button>
           <md-button class="md-icon-button" @click="remove(index)">
             <md-icon>delete_forever</md-icon>
           </md-button>
@@ -69,7 +50,7 @@ export default {
     add() {
       if (this.form.permissao) {
         const method = this.form.id ? "put" : "post"
-        services.funcaoPermissao
+        services.permissaoFuncao
           [method]({ funcao: this.model, ...this.form })
           .then(response => {
             if (method === "post") {
@@ -84,7 +65,7 @@ export default {
       }
     },
     remove(index) {
-      services.funcaoPermissao
+      services.permissaoFuncao
         .delete(this.list[index].id)
         .then(response => {
           this.list.splice(index, 1)
@@ -127,7 +108,7 @@ export default {
       const { id } = value
 
       if (id) {
-        services.funcaoPermissao
+        services.permissaoFuncao
           .get({
             params: {
               q: JSON.stringify({

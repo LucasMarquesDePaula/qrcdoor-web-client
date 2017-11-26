@@ -73,8 +73,7 @@ export default {
           [method]({ funcao: this.model, ...this.form })
           .then(response => {
             if (method === "post") {
-              this.form.id = response.data.id
-              this.list.push(this.form)
+              this.list.push(response.data)
             }
             this.form = {}
             this.selection = ""

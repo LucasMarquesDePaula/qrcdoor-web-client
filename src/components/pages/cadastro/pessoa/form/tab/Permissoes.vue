@@ -1,14 +1,10 @@
 <template>
-  <div>
+  <section>
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container>
-          <label>Estrutura</label>
-          <md-select v-model="form.estrutura">
-            <md-option v-for="(option, index) in [ { id: 1, name: 'a' }, { id: 2, name: 'b' }, { id: 3, name: 'c' } ]" :key="index" :value="option">
-              {{ option.name }}
-            </md-option>
-          </md-select>
+          <label>Permissao</label>
+          <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchPermissao" @selected="selected" :debounce="500" />
         </md-input-container>
       </md-layout>
       <md-layout>
@@ -24,56 +20,133 @@
         </md-input-container>
       </md-layout>
       <md-layout md-flex="10">
-        <md-button class="md-icon-button md-raised md-primary">
-          <md-icon>add</md-icon>
+        <md-button @click="add()" class="md-icon-button md-raised md-primary">
+          <md-icon>{{form.id ? "save" : "add"}}</md-icon>
         </md-button>
       </md-layout>
     </md-layout>
     <md-table>
+
       <md-table-header>
         <md-table-row>
-          <md-table-head>Estrutura</md-table-head>
-          <md-table-head>Função</md-table-head>
+          <md-table-head>Nome</md-table-head>
           <md-table-head>Inicio</md-table-head>
           <md-table-head>Fim</md-table-head>
         </md-table-row>
       </md-table-header>
 
       <md-table-body>
-        <md-table-row v-for="(permissaoPessoa, index) in model.permissoesPessoa" :key="index">
-          <md-table-cell>{{permissaoPessoa.estrutura.descricao}}</md-table-cell>
-          <md-table-cell></md-table-cell>
-          <md-table-cell>{{permissaoPessoa.dataInicio}}</md-table-cell>
-          <md-table-cell>{{permissaoPessoa.dataFim}}</md-table-cell>
-          <md-button class="md-icon-button">
-            <md-icon>delete_forever</md-icon>
+        <md-table-row v-for="(item, index) in list" :key="index">
+          <md-table-cell>{{item.permissao.descricao}}</md-table-cell>
+          <md-table-cell>{{item.dataInicio | date}}</md-table-cell>
+          <md-table-cell>{{item.dataFim | date}}</md-table-cell>
+          <md-button class="md-icon-button" @click="edit(index)">
+            <md-icon>edit</md-icon>
           </md-button>
-        </md-table-row>
-        <md-table-row v-for="(permissaoFuncao, index) in model.permissoesFuncoes" :key="index">
-          <md-table-cell>{{permissaoFuncao.estrutura.descricao}}</md-table-cell>
-          <md-table-cell>{{permissaoFuncao.funcao.descricao}}</md-table-cell>
-          <md-table-cell>{{permissaoFuncao.dataInicio}}</md-table-cell>
-          <md-table-cell>{{permissaoFuncao.dataFim}}</md-table-cell>
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" @click="remove(index)">
             <md-icon>delete_forever</md-icon>
           </md-button>
         </md-table-row>
       </md-table-body>
+
     </md-table>
-  </div>
+  </section>
 </template>
 
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
+
+import services from "@service/all"
+
 export default {
   extends: AbstractTab,
   data() {
     return {
-      form: {}
+      form: {},
+      list: [],
+      selection: ""
     }
   },
   methods: {
-    remove(array, object) {}
+    add() {
+      if (this.form.permissao) {
+        const method = this.form.id ? "put" : "post"
+        services.permissaoPessoa
+          [method]({ pessoa: this.model, ...this.form })
+          .then(response => {
+            if (method === "post") {
+              this.list.push(response.data)
+            }
+            this.form = {}
+            this.selection = ""
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+    },
+    remove(index) {
+      services.permissaoPessoa
+        .delete(this.list[index].id)
+        .then(response => {
+          this.list.splice(index, 1)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    edit(index) {
+      this.form = this.list[index]
+      this.selection = this.form.permissao.nome
+    },
+    fetchPermissao(args) {
+      return this.fetch(services.permissao, args)
+    },
+    fetch(service, { q }) {
+      return new Promise((resolve, reject) => {
+        service
+          .get({
+            params: {
+              q: JSON.stringify({ descricao: q })
+            }
+          })
+          .then(response => {
+            resolve(response.data.content)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    selected(item) {
+      const { id, descricao } = item
+      this.form.permissao = { id, descricao }
+    }
+  },
+  watch: {
+    model(value) {
+      this.list = []
+      const { id } = value
+
+      if (id) {
+        services.permissaoPessoa
+          .get({
+            params: {
+              q: JSON.stringify({
+                pessoa: {
+                  id: id || 0
+                }
+              })
+            }
+          })
+          .then(response => {
+            this.list = response.data.content
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+    }
   }
 }
 </script>

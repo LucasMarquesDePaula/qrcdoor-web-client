@@ -72,8 +72,7 @@ export default {
         serviceFuncaoPessoa
           .post({ funcao: this.model, ...this.form })
           .then(response => {
-            console.log(response)
-            this.list.push(this.form)
+            this.list.push(response.data)
             this.form = {}
             this.selection = ""
           })

@@ -13,8 +13,15 @@
       <md-layout>
         <md-input-container :class="{ 'md-input-invalid': $v.model.senha.$error }">
           <label>Senha</label>
-          <md-input type="password" v-model="senha" required></md-input>
+          <md-input type="password" v-model="model.senha" required></md-input>
           <span class="md-error" v-show="$v.model.senha.$error">Valor inválido</span>
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': $v.model.pin.$error }">
+          <label>PIN</label>
+          <md-input type="password" v-model="model.pin" required></md-input>
+          <span class="md-error" v-show="$v.model.pin.$error">Valor inválido</span>
         </md-input-container>
       </md-layout>
     </md-layout>
@@ -24,6 +31,7 @@
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
 import padStart from "lodash/padStart"
+import services from "@service/all"
 
 function toMinutes(value) {
   // console.log(value)
@@ -41,7 +49,8 @@ export default {
   extends: AbstractTab,
   data() {
     return {
-      tempoMaximoAbertura: ""
+      tempoMaximoAbertura: "",
+      selection: ""
     }
   },
   methods: {
@@ -66,12 +75,15 @@ export default {
     },
     selected(item) {
       const { id, descricao } = item
-      this.form.estruturaPai = { id, descricao }
+      this.model.estruturaPai = { id, descricao }
     }
   },
   watch: {
     model(value) {
       this.tempoMaximoAbertura = toTime(value.tempoMaximoAbertura || 0)
+      this.model.senha = ""
+      this.model.pin = ""
+      this.selection = ""
     },
     tempoMaximoAbertura(value) {
       this.model.tempoMaximoAbertura = toMinutes(value)

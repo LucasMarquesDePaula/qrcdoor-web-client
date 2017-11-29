@@ -7,6 +7,13 @@
           <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchAmbiente" @selected="selected" :debounce="500" />
         </md-input-container>
       </md-layout>
+      <md-layout>
+        <md-input-container md-has-password :class="{ 'md-input-invalid': $v.model.senha.$error }">
+          <label>Senha</label>
+          <md-input v-model="model.senha" type="password"></md-input>
+          <span class="md-error" v-show="$v.model.senha.$error">Valor inválido</span>
+        </md-input-container>
+      </md-layout>
     </md-layout>
 
     <md-layout :md-gutter="true">
@@ -42,6 +49,7 @@
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
 import padStart from "lodash/padStart"
+import services from "@service/all"
 
 function toMinutes(value) {
   // console.log(value)
@@ -59,7 +67,8 @@ export default {
   extends: AbstractTab,
   data() {
     return {
-      tempoMaximoAbertura: ""
+      tempoMaximoAbertura: "",
+      selection: ""
     }
   },
   methods: {
@@ -84,12 +93,14 @@ export default {
     },
     selected(item) {
       const { id, descricao } = item
-      this.form.estruturaPai = { id, descricao }
+      this.model.estruturaPai = { id, descricao }
     }
   },
   watch: {
     model(value) {
       this.tempoMaximoAbertura = toTime(value.tempoMaximoAbertura || 0)
+      this.model.senha = ""
+      this.selection = ""
     },
     tempoMaximoAbertura(value) {
       this.model.tempoMaximoAbertura = toMinutes(value)

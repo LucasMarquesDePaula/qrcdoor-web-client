@@ -60,8 +60,8 @@ import Vue from "vue"
 import $ from "jquery"
 // import avatar from "@images/avatar.png"
 import {
-  minValue,
   minLength,
+  minValue,
   numeric,
   required
 } from "vuelidate/lib/validators"
@@ -90,6 +90,9 @@ export default {
       senha: {},
       situacao: {
         required
+      },
+      senha: {
+        
       },
       tempoMaximoAbertura: {
         minValue: minValue(0),

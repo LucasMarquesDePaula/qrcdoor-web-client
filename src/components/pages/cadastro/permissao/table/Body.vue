@@ -3,7 +3,7 @@
     <md-table-row v-for="(model, index) in list" :key="index">
       <md-table-cell md-numeric>{{model.id}}</md-table-cell>
       <md-table-cell>{{model.descricao}}</md-table-cell>
-      <md-table-cell>{{model.situacao | situacao}}</md-table-cell>
+      
       <md-table-cell>
         <md-button class="md-icon-button" @click="$emit('edit', model)">
           <md-icon>edit</md-icon>

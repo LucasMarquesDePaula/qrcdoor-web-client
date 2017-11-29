@@ -31,6 +31,7 @@
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
 import padStart from "lodash/padStart"
+import services from "@service/all"
 
 function toMinutes(value) {
   // console.log(value)
@@ -48,7 +49,8 @@ export default {
   extends: AbstractTab,
   data() {
     return {
-      tempoMaximoAbertura: ""
+      tempoMaximoAbertura: "",
+      selection: ""
     }
   },
   methods: {
@@ -73,12 +75,15 @@ export default {
     },
     selected(item) {
       const { id, descricao } = item
-      this.form.estruturaPai = { id, descricao }
+      this.model.estruturaPai = { id, descricao }
     }
   },
   watch: {
     model(value) {
       this.tempoMaximoAbertura = toTime(value.tempoMaximoAbertura || 0)
+      this.model.senha = ""
+      this.model.pin = ""
+      this.selection = ""
     },
     tempoMaximoAbertura(value) {
       this.model.tempoMaximoAbertura = toMinutes(value)

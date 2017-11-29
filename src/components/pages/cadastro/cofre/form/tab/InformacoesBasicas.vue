@@ -13,8 +13,15 @@
       <md-layout>
         <md-input-container :class="{ 'md-input-invalid': $v.model.senha.$error }">
           <label>Senha</label>
-          <md-input type="password" v-model="senha" required></md-input>
+          <md-input type="password" v-model="model.senha" required></md-input>
           <span class="md-error" v-show="$v.model.senha.$error">Valor inválido</span>
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container :class="{ 'md-input-invalid': $v.model.pin.$error }">
+          <label>PIN</label>
+          <md-input type="password" v-model="model.pin" required></md-input>
+          <span class="md-error" v-show="$v.model.pin.$error">Valor inválido</span>
         </md-input-container>
       </md-layout>
     </md-layout>

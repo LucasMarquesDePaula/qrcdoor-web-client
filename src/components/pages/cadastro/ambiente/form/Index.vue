@@ -87,6 +87,7 @@ export default {
         required,
         minLength: minLength(4)
       },
+      senha: {},
       situacao: {
         required
       },
@@ -148,6 +149,7 @@ export default {
   },
   watch: {
     model(value) {
+      this.senha = ""
       this.foto = `${baseURL}/pessoa/foto/${value.id}?v=${Date.now()}`
     }
   }

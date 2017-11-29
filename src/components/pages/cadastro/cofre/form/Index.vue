@@ -87,6 +87,8 @@ export default {
         required,
         minLength: minLength(4)
       },
+      senha: {},
+      pin: {},
       situacao: {
         required
       },
@@ -120,7 +122,6 @@ export default {
         }
 
         const file = event.currentTarget.files[0]
-        console.log(file)
         const data = new FormData()
         data.append("file", file)
 
@@ -148,6 +149,7 @@ export default {
   },
   watch: {
     model(value) {
+      this.senha = ""
       this.foto = `${baseURL}/pessoa/foto/${value.id}?v=${Date.now()}`
     }
   }

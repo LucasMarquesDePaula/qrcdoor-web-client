@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="full-width">
     <md-tabs class="no-navigation">
       <md-tab :md-active="tab === 'table'">
         <crud-table ref="table" :service="service" @edit="onTableEdit" @add="onTableAdd" />
@@ -135,7 +135,7 @@ export default {
     display: none;
   }
 }
-section {
+section.full-width {
   width: 100%;
 }
 </style>

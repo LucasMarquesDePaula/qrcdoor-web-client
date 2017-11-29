@@ -11,9 +11,6 @@ import VueTheMask from "vue-the-mask"
 import Vuelidate from "vuelidate"
 import flatpickr from "flatpickr"
 import isEmpty from "lodash/isEmpty"
-import { mapGetters } from "vuex"
-import router from "@router"
-import store from "@store"
 
 Vue.config.productionTip = false
 
@@ -36,36 +33,6 @@ Vue.directive("datepicker", {
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
-  router,
-  store,
-  // vuex: {
-  //   getters: {
-  //     auth: ({ auth }) => auth.auth,
-  //     route: ({ route }) => route
-  //   }
-  // },
-  template: "<App/>",
   components: { App },
-  computed: {
-    ...mapGetters(["auth", "route"])
-  },
-  created() {
-    const loginPath = "/login"
-    const auth = isEmpty(this.auth)
-    const currentPath = this.$router.currentRoute.path
-
-    this.$router.beforeEach((from, to, next) => {
-      // if (from.path === loginPath) {
-      //   // Se estiver logado então desloga
-      //   next(auth ? "/logout" : true)
-      //   return
-      // }
-      // next(auth ? true : loginPath)
-      next()
-    })
-
-    if (!auth && currentPath !== loginPath) {
-      // router.push({ name: "login" })
-    }
-  }
+  template: "<App/>"
 })

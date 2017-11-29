@@ -6,6 +6,7 @@ export default [
   },
   {
     path: "/",
+    name: "/",
     hidden: true,
     component: resolve => require(["@pages/Index"], resolve)
   },

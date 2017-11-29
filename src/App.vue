@@ -39,13 +39,27 @@
 </template>
 
 <script>
-import routes from "./router/routes"
+import { mapGetters } from "vuex"
+import router from "@router"
+import routes from "@router/routes"
+import store from "@store"
 
 export default {
   data() {
     return {
       routes,
       transition: "fade"
+    }
+  },
+  store,
+  router,
+  computed: {
+    ...mapGetters(["loggedIn"]),
+    loginRoute() {
+      return "/login"
+    },
+    currentRoute() {
+      return this.$router.currentRoute
     }
   },
   methods: {
@@ -63,12 +77,13 @@ export default {
     },
     close(ref) {
       console.log("Closed: $ref")
+    },
+    isLoginRoute(route) {
+      return route === this.loginRoute
     }
   },
   watch: {
     $route(to, from) {
-      console.log(this.$router)
-      console.log(this.$route)
       const toDepth = to.path.split("/").length
       const fromDepth = from.path.split("/").length
       if (toDepth === fromDepth) {
@@ -78,6 +93,22 @@ export default {
       } else {
         this.transition = "slide-left"
       }
+    }
+  },
+  mounted() {
+    const self = this
+    self.$router.beforeEach((from, to, next) => {
+      const { loggedIn, loginRoute } = self
+      const { path } = from
+      const isLoginRoute = self.isLoginRoute(path)
+      const route = isLoginRoute ? true : loggedIn ? true : loginRoute
+      next(route)
+      // next()
+      // this.$router.push(route)
+    })
+    // TODO testar sessão
+    if (!self.isLoginRoute(self.currentRoute) && !this.loggedIn) {
+      self.$router.push(self.loginRoute)
     }
   }
 }

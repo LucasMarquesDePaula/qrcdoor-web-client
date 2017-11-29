@@ -5,8 +5,8 @@
       <md-button class="md-icon-button" @click="toggleLeftSidenav">
         <md-icon>menu</md-icon>
       </md-button>
+      <h2 class="md-title">{{$route.name}}</h2>
       <img class="logo" src="/static/images/logo.png" />
-      <!-- <h2 class="md-title">QRC Door</h2> -->
     </md-toolbar>
     <!-- /Topbar -->
 
@@ -14,7 +14,7 @@
     <md-sidenav class="md-left" ref="leftSidenav">
       <md-toolbar class="md-large">
         <div class="md-toolbar-container">
-          <h3 class="md-title">Sidenav content</h3>
+          <h3 class="md-title">Menu</h3>
         </div>
       </md-toolbar>
       <md-list>
@@ -67,6 +67,8 @@ export default {
   },
   watch: {
     $route(to, from) {
+      console.log(this.$router)
+      console.log(this.$route)
       const toDepth = to.path.split("/").length
       const fromDepth = from.path.split("/").length
       if (toDepth === fromDepth) {
@@ -90,5 +92,7 @@ export default {
 }
 img.logo {
   height: 46px;
+  position: absolute;
+  right: 20px;
 }
 </style>

@@ -101,8 +101,8 @@ export default {
       })
     },
     selected(item) {
-      const { id, nome } = item
-      this.form.permissao = { id, nome }
+      const { id, descricao } = item
+      this.form.permissao = { id, descricao }
     }
   },
   watch: {

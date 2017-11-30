@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <md-layout :md-gutter="true">
       <md-layout>
         <md-input-container>
@@ -21,7 +21,7 @@
       </md-layout>
       <md-layout md-flex="10">
         <md-button @click="add()" class="md-icon-button md-raised md-primary">
-          <md-icon>add</md-icon>
+          <md-icon>{{form.id ? "save" : "add"}}</md-icon>
         </md-button>
       </md-layout>
     </md-layout>
@@ -48,14 +48,13 @@
         </md-table-row>
       </md-table-body>
     </md-table>
-  </div>
+  </section>
 </template>
 
 <script>
 import AbstractTab from "@/components/abstract/crud/form-tab"
 
-import servicePessoa from "@service/pessoa"
-import serviceFuncaoPessoa from "@service/funcaoPessoa"
+import services from "@service/all"
 
 export default {
   extends: AbstractTab,
@@ -69,10 +68,13 @@ export default {
   methods: {
     add() {
       if (this.form.pessoa) {
-        serviceFuncaoPessoa
-          .post({ funcao: this.model, ...this.form })
+        const method = this.form.id ? "put" : "post"
+        services.permissaoPessoa
+          [method]({ permissao: this.model, ...this.form })
           .then(response => {
-            this.list.push(response.data)
+            if (method === "post") {
+              this.list.push(response.data)
+            }
             this.form = {}
             this.selection = ""
           })
@@ -81,18 +83,29 @@ export default {
           })
       }
     },
-    remove(index) {},
-    edit(index) {},
+    remove(index) {
+      services.permissaoPessoa
+        .delete(this.list[index].id)
+        .then(response => {
+          this.list.splice(index, 1)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    edit(index) {
+      this.form = this.list[index]
+      this.selection = this.form.pessoa.nome
+    },
     fetchPessoa(args) {
-      return this.fetch(servicePessoa, args)
+      return this.fetch(services.pessoa, args)
     },
     fetch(service, { q }) {
       return new Promise((resolve, reject) => {
         service
           .get({
             params: {
-              nome: q,
-              situacao: "A"
+              q: JSON.stringify({ nome: q, situacao: "A" })
             }
           })
           .then(response => {
@@ -109,9 +122,28 @@ export default {
     }
   },
   watch: {
-    model() {
+    model(value) {
       this.list = []
-      // serviceFuncaoPessoa.get({})
+      const { id } = value
+
+      if (id) {
+        services.permissaoPessoa
+          .get({
+            params: {
+              q: JSON.stringify({
+                permissao: {
+                  id: id || 0
+                }
+              })
+            }
+          })
+          .then(response => {
+            this.list = response.data.content
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
     }
   }
 }

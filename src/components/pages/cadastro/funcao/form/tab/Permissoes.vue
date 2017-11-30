@@ -1,10 +1,22 @@
 <template>
   <div>
     <md-layout :md-gutter="true">
-      <md-layout md-flex="60">
+      <md-layout>
         <md-input-container>
           <label>Permissao</label>
           <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchPermissao" @selected="selected" :debounce="500" />
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container>
+          <label>Inicio</label>
+          <md-input type="date" v-model="form.dataInicio"></md-input>
+        </md-input-container>
+      </md-layout>
+      <md-layout>
+        <md-input-container>
+          <label>Fim</label>
+          <md-input type="date" v-model="form.dataFim"></md-input>
         </md-input-container>
       </md-layout>
       <md-layout md-flex="10">
@@ -17,12 +29,19 @@
       <md-table-header>
         <md-table-row>
           <md-table-head>Descrição</md-table-head>
+          <md-table-head>Inicio</md-table-head>
+          <md-table-head>Fim</md-table-head>
         </md-table-row>
       </md-table-header>
 
       <md-table-body>
         <md-table-row v-for="(item, index) in list" :key="index">
           <md-table-cell>{{item.permissao.descricao}}</md-table-cell>
+          <md-table-cell>{{item.dataInicio | date}}</md-table-cell>
+          <md-table-cell>{{item.dataFim | date}}</md-table-cell>
+          <md-button class="md-icon-button" @click="edit(index)">
+            <md-icon>edit</md-icon>
+          </md-button>
           <md-button class="md-icon-button" @click="remove(index)">
             <md-icon>delete_forever</md-icon>
           </md-button>

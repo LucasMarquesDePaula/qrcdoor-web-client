@@ -91,9 +91,7 @@ export default {
       situacao: {
         required
       },
-      senha: {
-        
-      },
+      senha: {},
       tempoMaximoAbertura: {
         minValue: minValue(0),
         numeric

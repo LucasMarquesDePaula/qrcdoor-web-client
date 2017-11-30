@@ -44,5 +44,11 @@ export default [
     name: "Ambientes",
     icon: "lock",
     component: resolve => require(["@pages/cadastro/ambiente"], resolve)
+  },
+  {
+    path: "/relatorio",
+    name: "Relatório",
+    icon: "dashboard",
+    component: resolve => require(["@pages/relatorio"], resolve)
   }
 ]

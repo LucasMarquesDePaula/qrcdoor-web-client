@@ -71,7 +71,7 @@ export default {
     add() {
       if (this.form.funcao) {
         const method = this.form.id ? "put" : "post"
-        services.funcaoPessoa
+        services.permissaoFuncao
           [method]({ permissao: this.model, ...this.form })
           .then(response => {
             if (method === "post") {
@@ -86,7 +86,7 @@ export default {
       }
     },
     remove(index) {
-      services.funcaoPessoa
+      services.permissaoFuncao
         .delete(this.list[index].id)
         .then(response => {
           this.list.splice(index, 1)
@@ -129,7 +129,7 @@ export default {
       const { id } = value
 
       if (id) {
-        services.funcaoPessoa
+        services.permissaoFuncao
           .get({
             params: {
               q: JSON.stringify({

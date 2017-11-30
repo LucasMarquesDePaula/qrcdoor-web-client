@@ -1,6 +1,17 @@
 # qrcdoor-web-client
-
 > QRCDoor Web Client
+
+Módulo para gestão de regras de acesso do sistema [QRCDoor](https://github.com/AlunoTADS/QRCDoor)
+
+### Prerequisitos
+
+Node 8
+
+NPM 5
+
+## License
+
+Este projeto é licenciado sob GNU Licence - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes
 
 ## Build Setup
 
@@ -27,4 +38,6 @@ npm run e2e
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Este projeto foi construido usando vue-cli, para mais detalhes ver documentação:
+[Guia](http://vuejs-templates.github.io/webpack/);
+[docs for vue-loader](http://vuejs.github.io/vue-loader).

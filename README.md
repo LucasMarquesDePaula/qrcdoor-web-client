@@ -9,11 +9,11 @@ Node 8
 
 NPM 5
 
-## License
+## Licença
 
 Este projeto é licenciado sob GNU Licence - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes
 
-## Build Setup
+## Instalação e execução
 
 ``` bash
 # install dependencies

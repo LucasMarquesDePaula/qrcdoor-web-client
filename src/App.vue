@@ -96,18 +96,37 @@ export default {
     }
   },
   mounted() {
+    // const self = this
+    // self.$router.beforeEach((from, to, next) => {
+    //   const { loggedIn, loginRoute } = self
+    //   const { path } = from
+    //   const isLoginRoute = self.isLoginRoute(path)
+    //   const route = isLoginRoute ? true : loggedIn ? true : loginRoute
+    //   next(route)
+    //   // next()
+    //   // this.$router.push(route)
+    // })
+    // // TODO testar sessão
+    // if (!self.isLoginRoute(self.currentRoute) && !this.loggedIn) {
+    //   self.$router.push(self.loginRoute)
+    // }
     const self = this
+
     self.$router.beforeEach((from, to, next) => {
-      const { loggedIn, loginRoute } = self
+      const { loginRoute } = self
       const { path } = from
-      const isLoginRoute = self.isLoginRoute(path)
-      const route = isLoginRoute ? true : loggedIn ? true : loginRoute
-      next(route)
-      // next()
-      // this.$router.push(route)
+      if (
+        self.isLoginRoute(path) &&
+        !self.isLoginRoute(window.location.pathname)
+      ) {
+        window.location = loginRoute
+        return
+      }
+      next()
     })
-    // TODO testar sessão
-    if (!self.isLoginRoute(self.currentRoute) && !this.loggedIn) {
+
+    debugger
+    if (self.isLoginRoute(window.location.pathname)) {
       self.$router.push(self.loginRoute)
     }
   }

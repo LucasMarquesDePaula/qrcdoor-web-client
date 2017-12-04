@@ -68,19 +68,21 @@ export default {
       service
         .post(qs.stringify(auth))
         .then(response => {
-          console.log(response.data.trim() === "success")
-          if (response.data.trim() === "success") {
-            console.log("vai")
-            self.login(auth)
-            self.$router.push({ name: "/" })
-            return
-          }
+          // console.log(response.data.trim() === "success")
+          // if (response.data.trim() === "success") {
+          // console.log("vai")
+          self.login(auth)
+          // self.$router.push({ name: "/" })
+          window.location = "/"
+          // return
+          // }
 
-          this.error = "Usuario e senha não encontrados"
+          // this.error = "Usuario e senha não encontrados"
         })
         .catch(error => {
           console.error(error)
-          self.logout()
+          // self.logout()
+          this.error = "Usuario e senha não encontrados"
           // self.$store.dispatch("logout")
         })
     }

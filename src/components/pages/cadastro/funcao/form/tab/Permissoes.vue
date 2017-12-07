@@ -95,7 +95,7 @@ export default {
     },
     edit(index) {
       this.form = this.list[index]
-      this.selection = this.form.permissao.nome
+      this.selection = this.form.permissao.descricao
     },
     fetchPermissao(args) {
       return this.fetch(services.permissao, args)

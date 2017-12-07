@@ -1,13 +1,13 @@
 <template>
   <section>
-    <md-layout :md-gutter="true">
-      <md-layout md-flex="60">
-        <md-input-container>
-          <label>Localização</label>
-          <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchAmbiente" @selected="selected" :debounce="500" />
-        </md-input-container>
-      </md-layout>
-    </md-layout>
+    <!-- <md-layout :md-gutter="true"> -->
+    <!-- <md-layout md-flex="60"> -->
+    <!-- <md-input-container> -->
+    <!-- <label>Localização</label> -->
+    <!-- <md-autocomplete v-model="selection" print-attribute="descricao" :fetch="fetchAmbiente" @selected="selected" :debounce="500" /> -->
+    <!-- </md-input-container> -->
+    <!-- </md-layout> -->
+    <!-- </md-layout> -->
 
     <md-layout :md-gutter="true">
       <md-layout>

@@ -1,15 +1,11 @@
 <template>
-  <div class="hello">
+  <div class="index">
     <h1>{{ msg }}</h1>
-
-    <img src="/static/images/favicon/QRCDoor_logo.png" width="100%" />
   </div>
-
 </template>
 
 <script>
 export default {
-  name: "hello",
   data() {
     return {
       msg: "Bem-vindo"
@@ -18,24 +14,17 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+<style lang="scss" scoped>
+div.index {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url(/static/images/favicon/QRCDoor_logo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  h1 {
+    font-weight: normal;
+    text-align: center;
+  }
 }
 </style>

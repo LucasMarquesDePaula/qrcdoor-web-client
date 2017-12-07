@@ -97,7 +97,7 @@ export default {
     },
     edit(index) {
       this.form = this.list[index]
-      this.selection = this.form.funcao.nome
+      this.selection = this.form.funcao.descricao
     },
     fetchFuncao(args) {
       return this.fetch(services.funcao, args)

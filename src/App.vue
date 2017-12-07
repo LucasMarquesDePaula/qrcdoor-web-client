@@ -2,11 +2,17 @@
   <div id="app">
     <!-- Topbar -->
     <md-toolbar>
-      <md-button class="md-icon-button" @click="toggleLeftSidenav">
-        <md-icon>menu</md-icon>
-      </md-button>
-      <h2 class="md-title">{{$route.name}}</h2>
-      <img class="logo" src="/static/images/logo.png" />
+      <div class="md-toolbar-container">
+        <md-button class="md-icon-button" @click="toggleLeftSidenav">
+          <md-icon>menu</md-icon>
+        </md-button>
+        <h2 class="md-title" style="flex: 1;">{{$route.name}}</h2>
+        <img class="logo" src="/static/images/logo.png" />
+        <md-button href="/logout" class="md-icon-button">
+          <md-icon>input</md-icon>
+          <md-tooltip md-direction="bottom">Logout</md-tooltip>
+        </md-button>
+      </div>
     </md-toolbar>
     <!-- /Topbar -->
 
@@ -125,7 +131,7 @@ export default {
       next()
     })
 
-    debugger
+    // debugger
     if (self.isLoginRoute(window.location.pathname)) {
       self.$router.push(self.loginRoute)
     }
@@ -143,6 +149,6 @@ export default {
 img.logo {
   height: 46px;
   position: absolute;
-  right: 20px;
+  right: 130px;
 }
 </style>

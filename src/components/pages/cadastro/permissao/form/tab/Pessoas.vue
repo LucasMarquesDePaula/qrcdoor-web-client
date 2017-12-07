@@ -125,7 +125,7 @@ export default {
     model(value) {
       this.list = []
       const { id } = value
-
+      debugger
       if (id) {
         services.permissaoPessoa
           .get({

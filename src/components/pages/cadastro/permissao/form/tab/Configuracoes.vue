@@ -154,8 +154,26 @@ export default {
       value.herda = Boolean(value.herda)
       value.gerencia = Boolean(value.gerencia)
       value.monitora = Boolean(value.monitora)
-      value.diasSemana = value.diasSemana || "000000"
-      value.meses = value.meses || "000000000000"
+
+      const diasSemana = value.diasSemana || "000000"
+
+      this.diasSemana.splice(0)
+
+      for (let i = 0, { length } = diasSemana; i < length; i++) {
+        if (Boolean(Number(diasSemana[i]))) {
+          this.diasSemana.push(`${i}`)
+        }
+      }
+
+      const meses = value.meses || "000000000000"
+
+      this.meses.splice(0)
+
+      for (let i = 0, { length } = meses; i < length; i++) {
+        if (Boolean(Number(meses[i]))) {
+          this.meses.push(`${i}`)
+        }
+      }
     },
     diasSemana(value) {
       const diasSemana = fill(new Array(7), 0)

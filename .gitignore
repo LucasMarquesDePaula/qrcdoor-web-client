@@ -76,3 +76,4 @@ selenium-debug.log
 *.njsproj
 *.sln
 package-lock.json
+src/service/config.js
